@@ -11,19 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory_items', function (Blueprint $table) {
+        Schema::create('inventory_item_batches', function (Blueprint $table) {
             $table->id();
-            $table->string('item_name');
+            $table->string('batch_number')->default(0);
+            $table->integer('stock');
+            $table->date('expiration_date');
+            $table->unsignedBigInteger('inventory_item_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('measurement_id');
-            $table->integer('total_stock');
+            $table->unsignedBigInteger('unit_id');
 
-            $table->timestamps();
-            $table->unsignedBigInteger('updated_by');
-
+            $table->foreign('inventory_item_id')->references('id')->on('inventory_items');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('measurement_id')->references('id')->on('measurements');
-            $table->foreign('updated_by')->references('id')->on('users');
+            $table->foreign('unit_id')->references('id')->on('units');
+
+            $table->timestamps();
         });
     }
 
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory_items');
+        Schema::dropIfExists('inventory_item_batches');
     }
 };

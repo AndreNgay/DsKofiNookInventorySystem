@@ -21,27 +21,15 @@ new class extends Component {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 @if(Auth::user()->role == 'owner')
                 <li class="nav-item">
-                    <a class="nav-link" href="/item">Items</a>
+                    <a class="nav-link" href="/inventory">Inventory</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/category">Categories</a>
+                    <a class="nav-link" href="/orders">Orders</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/unit">Units</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/type">Types</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/account">Accounts</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/report">Report</a>
+                    <a class="nav-link" href="/reports">Reports</a>
                 </li>
                 @endif
             </ul>

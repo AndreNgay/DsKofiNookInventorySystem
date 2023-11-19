@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InventoryItemController;
+use App\Http\Controllers\InventoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('inventory-items', [InventoryItemController::class, 'index'])
+Route::get('inventory', [InventoryController::class, 'index'])
     ->middleware(['auth'])
-    ->name('inventory-items');
+    ->name('inventory');

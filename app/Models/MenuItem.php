@@ -7,5 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class MenuItem extends Model
 {
+    // $table->id();
+    // $table->string('item_name');
+    // $table->string('price');
+
+    // $table->timestamps();
+    protected $fillable = [
+        'item_name',
+        'price'
+    ];
     use HasFactory;
 }

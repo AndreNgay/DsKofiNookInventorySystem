@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Measurement extends Model
 {
+    protected $fillable = [
+        'measurement_name',
+        'description'
+    ];
+
     use HasFactory;
 }

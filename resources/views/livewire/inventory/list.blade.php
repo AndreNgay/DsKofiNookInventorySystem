@@ -3,14 +3,14 @@
 use Livewire\Volt\Component;
 use App\Models\InventoryItem;
 use App\Models\Category;
-use App\Models\Measurement;
+use App\Models\Unit;
 use Livewire\Attributes\On; 
 
 
 new class extends Component {
     public $inventory_items = [];
     public $categories = [];
-    public $measurements = [];
+    public $units = [];
 
     public function mount() {
         $this->getInventoryItems();
@@ -20,7 +20,7 @@ new class extends Component {
     public function getInventoryItems() {
         $this->inventory_items = InventoryItem::all();
         $this->categories = Category::all();
-        $this->measurements = Measurement::all();
+        $this->units = Unit::all();
     }
 
 
@@ -34,7 +34,6 @@ new class extends Component {
                     <th scope="col">#</th>
                     <th scope="col">Item Name</th>
                     <th scope="col">Category</th>
-                    <th scope="col">Measurement</th>
                     <th scope="col">Total Stock</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -51,14 +50,14 @@ new class extends Component {
                             @endif
                         @endforeach
                     </td>
-                    <td>
-                        @foreach ($measurements as $measurement)
-                            @if($measurement->id == $inventory_item->measurement_id)
-                                {{ $measurement->measurement_name }}
+
+                    <td>{{ $inventory_item->total_stock }}
+                        @foreach ($units as $unit)
+                            @if($unit->id == $inventory_item->unit_id)
+                                {{ $unit->unit_symbol }}
                             @endif
                         @endforeach
                     </td>
-                    <td>{{ $inventory_item->total_stock }}</td>
                     <td>
                         <div class="d-flex">
                             <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal"

@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -43,5 +45,39 @@ class DatabaseSeeder extends Seeder
             'emergency_contact_relation' => '',
             'emergency_contact_number' => '',
         ]);
+
+        Category::create([
+            'category_name' => 'Liquid',
+            'description' => '',
+        ]);
+        
+        Category::create([
+            'category_name' => 'Dry Ingredient',
+            'description' => '',
+        ]);
+        Category::create([
+            'category_name' => 'Count',
+            'description' => '',
+        ]);
+
+        Unit::create([
+            'category_id' => 1,
+            'unit_name' => 'Mililiters',
+            'unit_symbol' => 'ml',
+            'unit_conversion' => 1,
+        ]);
+        Unit::create([
+            'category_id' => 2,
+            'unit_name' => 'Grams',
+            'unit_symbol' => 'g',
+            'unit_conversion' => 1,
+        ]);
+        Unit::create([
+            'category_id' => 3,
+            'unit_name' => 'Pieces',
+            'unit_symbol' => 'pcs',
+            'unit_conversion' => 1,
+        ]);
+
     }
 }

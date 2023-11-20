@@ -10,7 +10,7 @@ class InventoryItem extends Model
     protected $fillable = [
         'item_name',
         'category_id',
-        'measurement_id',
+        'unit_id',
         'total_stock',
         'updated_by',
     ];

@@ -13,7 +13,6 @@ class InventoryItemBatch extends Model
         'expiration_date',
         'inventory_item_id',
         'category_id',
-        'measurement_id',
         'unit_id'
     ];
 

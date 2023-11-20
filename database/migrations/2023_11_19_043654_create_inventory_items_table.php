@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('item_name');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('measurement_id');
+            $table->unsignedBigInteger('unit_id');
             $table->integer('total_stock')->nullable()->default(0);
 
             $table->timestamps();
             $table->unsignedBigInteger('updated_by')->nullable();
 
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('measurement_id')->references('id')->on('measurements');
+            $table->foreign('unit_id')->references('id')->on('units');
             $table->foreign('updated_by')->references('id')->on('users');
         });
     }

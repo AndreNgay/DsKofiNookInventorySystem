@@ -8,16 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     // $table->id();
+    // $table->unsignedBigInteger('category_id');
     // $table->string('unit_name');
-    // $table->unsignedBigInteger('measurement_id');
-
+    // $table->string('unit_symbol');
+    // $table->string('unit_conversion');
     // $table->timestamps();
-    
-    // $table->foreign('measurement_id')->references('id')->on('measurements');
+
+    // $table->foreign('category_id')->references('id')->on('categories');
 
     protected $fillable = [
+        'category_id',
         'unit_name',
-        'measurement_id'
+        'unit_symbol',
+        'unit_conversion',
     ];
     
     use HasFactory;

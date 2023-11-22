@@ -8,8 +8,8 @@ new class extends Component {
 
 <nav class="navbar navbar-expand-lg mb-3 bg-wheat">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/item">
-            <img class="navbar-icon" src="media/kofi-nook-icon.jpg" alt="">
+        <a class="navbar-brand" href="/inventory" wire:navigate>
+            Kofi Nook
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,11 +21,15 @@ new class extends Component {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 @if(Auth::user()->role == 'owner')
                 <li class="nav-item">
-                    <a class="nav-link" href="/inventory">Inventory</a>
+                    <a class="nav-link" href="/inventory" wire:navigate>Inventory</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/orders">Orders</a>
+                    <a class="nav-link" href="/menu" wire:navigate>Menu</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders" wire:navigate>Orders</a>
                 </li>
 
                 <li class="nav-item">

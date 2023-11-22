@@ -13,17 +13,14 @@ return new class extends Migration
     {
         Schema::create('inventory_item_batches', function (Blueprint $table) {
             $table->id();
-            $table->string('batch_number')->default(0);
             $table->integer('stock');
             $table->date('expiration_date');
             $table->unsignedBigInteger('inventory_item_id');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('measurement_id');
             $table->unsignedBigInteger('unit_id');
 
             $table->foreign('inventory_item_id')->references('id')->on('inventory_items');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('measurement_id')->references('id')->on('measurements');
             $table->foreign('unit_id')->references('id')->on('units');
 
             $table->timestamps();

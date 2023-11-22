@@ -23,10 +23,26 @@ new class extends Component {
         $this->units = Unit::all();
     }
 
+    public function showInventoryItemBatch($inventory_item_id) {
+        return view('pages.inventory-item-batch', [
+            'inventory_item' => InventoryItem::where('id', $inventory_item_id)->get(),
+        ]);
+    }
 
 }; ?>
 
 <div>
+
+    <div class="mb-2">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search by item name" aria-label="Search"
+                id="query" name="query">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+    </div>
+
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -35,34 +51,42 @@ new class extends Component {
                     <th scope="col">Item Name</th>
                     <th scope="col">Category</th>
                     <th scope="col">Total Stock</th>
+                    <th scope="col">Unit</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 @foreach ($inventory_items as $inventory_item)
                 <tr>
+
                     <th scope="row">{{ $inventory_item->id }}</th>
                     <td>{{ $inventory_item->item_name }}</td>
                     <td>
                         @foreach ($categories as $category)
-                            @if($category->id == $inventory_item->category_id)
-                                {{ $category->category_name }}
-                            @endif
+                        @if($category->id == $inventory_item->category_id)
+                        {{ $category->category_name }}
+                        @endif
                         @endforeach
                     </td>
-
-                    <td>{{ $inventory_item->total_stock }}
+                    <td>{{ $inventory_item->total_stock }}</td>
+                    <td>
                         @foreach ($units as $unit)
-                            @if($unit->id == $inventory_item->unit_id)
-                                {{ $unit->unit_symbol }}
-                            @endif
+                        @if($unit->id == $inventory_item->unit_id)
+                        {{ $unit->unit_name }}
+                        @endif
                         @endforeach
                     </td>
                     <td>
                         <div class="d-flex">
-                            <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal"
-                                data-bs-target="#updateItemModal{{ $inventory_item->id }}">
-                                <span class="bi bi-pencil-square"></span> Update
+                            <button class="btn btn-primary ms-2" type="button"
+                                href="{{ route('inventory-item-batch', ['id' => $inventory_item->id]) }}" wire:navigate>
+                                <span class="bi bi-eye-fill"> View Batches</span>
+                            </button>
+
+                            <button class="btn btn-primary ms-2" type="button"><span class="bi bi-pencil-square">
+                                    Edit</span></button>
+                            <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="">
+                                <span class="bi bi-trash-fill"> Delete</span>
                             </button>
                         </div>
                     </td>

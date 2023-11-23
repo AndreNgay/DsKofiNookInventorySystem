@@ -20,8 +20,12 @@
         <div id="sidebar">
             <h2>Kofi-Nook</h2>
             <a href="/inventory" wire:navigate><i class="fas fa-box"></i> Inventory</a>
-            <a href=""><i class="fas fa-solid fa-mug-hot" wire:navigat></i> Orders</a>
+            <a href="/order" wire:navigate><i class="fas fa-solid fa-mug-hot"></i> Orders</a>
             <a href="/menu" wire:navigate><i class="fas fa-bars"></i> Menu</a>
+            <a href="/measurements"><i class="fas fa-solid fa-ruler-vertical"></i>  Measurements</a>
+            <a href="/accounts"><i class="fas fa-solid fa-user-tie"></i> Accounts</a>
+            <a href="/reports"><i class="fas fa-solid fa-chart-pie"></i> Reports</a>
+            
             <a href="#edit-profile"><i class="fas fa-user-edit"></i> Edit Profile</a>
 
 
@@ -50,4 +54,10 @@
 </script>
 <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
-<script src=/js/scripts.js> </script> </html>
+<script src=/js/scripts.js> </script> 
+<script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>
+
+</html>

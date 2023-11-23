@@ -10,6 +10,8 @@ new class extends Component {
 @extends('layouts.app')
 @section('content')
 <div>
+    <h2>Inventory Item {{ $inventory_item_id }} Batches</h2>
+    <br />
     <div class="row">
         <livewire:inventory_item_batch.create :inventory_item_id="$inventory_item_id" />
     </div>

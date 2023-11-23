@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\InventoryItemBatchController;
+use App\Http\Controllers\InventoryItemHistoryController;
 use App\Http\Controllers\MenuItemIngredientController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +43,15 @@ Route::get('/menu-item-ingredients/{id}', [MenuItemIngredientController::class, 
 Route::get('menu', [MenuController::class, 'index'])
     ->middleware(['auth'])
     ->name('inventory');
+
+Route::get('order', [OrderController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('order');
+
+Route::get('/reports', [ReportController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('reports');
+
+Route::get('/item-history', [InventoryItemHistoryController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('item-history');

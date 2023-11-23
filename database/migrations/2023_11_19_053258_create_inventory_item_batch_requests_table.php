@@ -18,13 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger('stock');
             $table->date('expiration_date');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('measurement_id');
             $table->unsignedBigInteger('unit_id');
             $table->unsignedBigInteger('requested_by');
 
             $table->foreign('inventory_item_id')->references('id')->on('inventory_items');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('measurement_id')->references('id')->on('measurements');
             $table->foreign('unit_id')->references('id')->on('units');
             $table->foreign('requested_by')->references('id')->on('users');
 

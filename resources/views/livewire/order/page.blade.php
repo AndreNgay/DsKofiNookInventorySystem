@@ -10,13 +10,16 @@ new class extends Component {
 
 @section('content')
 <div>
-    <h2>Menu Items</h2>
+    <h2>Orders</h2>
     <br />
     <div class="row">
-        <livewire:menu_item.create />
-    </div>
-    <div class="row">
-        <livewire:menu_item.list />
+
+        <div class="col-md-8">
+            <livewire:order.list />
+        </div>
+        <div class="col-md-4">
+            <livewire:order.create />
+        </div>
     </div>
 </div>
 

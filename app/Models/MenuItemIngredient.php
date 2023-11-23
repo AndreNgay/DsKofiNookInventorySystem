@@ -23,9 +23,10 @@ class MenuItemIngredient extends Model
     protected $fillable = [
         'inventory_item_id',
         'menu_item_id',
+        'category_id',
+        'unit_id',
         'amount',
-        'measurement',
-        'unit'
+
     ];
     
     use HasFactory;

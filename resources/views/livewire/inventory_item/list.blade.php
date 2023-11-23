@@ -32,7 +32,6 @@ new class extends Component {
 }; ?>
 
 <div>
-
     <div class="mb-2">
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search by item name" aria-label="Search"
@@ -42,6 +41,36 @@ new class extends Component {
             </button>
         </form>
     </div>
+
+    <form id="filterForm">
+        <div class="row mb-1">
+            <div class="col-md-6">
+                <label for="category">Category</label>
+                <select id="category" class="form-control">
+                    <option value="all">All</option>
+                    <option value="category1">Category 1</option>
+                    <option value="category2">Category 2</option>
+                    <!-- Add more categories as needed -->
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="price">Price Range</label>
+                <select id="price" class="form-control">
+                    <option value="all">All</option>
+                    <option value="0-25">$0 - $25</option>
+                    <option value="25-50">$25 - $50</option>
+                    <!-- Add more price ranges as needed -->
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Apply Filter</button>
+            </div>
+            
+        </div>
+    </form>
 
     <div class="table-responsive">
         <table class="table table-hover">
@@ -80,6 +109,11 @@ new class extends Component {
                             <button class="btn btn-primary ms-2" type="button"
                                 href="{{ route('inventory-item-batch', ['id' => $inventory_item->id]) }}" wire:navigate>
                                 <span class="bi bi-eye-fill"> View Batches</span>
+                            </button>
+
+                            <button class="btn btn-primary ms-2" type="button"
+                                href="/item-history" wire:navigate>
+                                <span class="bi bi-clock-fill"> View History</span>
                             </button>
 
                             <button class="btn btn-primary ms-2" type="button"><span class="bi bi-pencil-square">

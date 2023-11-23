@@ -1,23 +1,17 @@
 <?php
 
 use Livewire\Volt\Component;
-use App\Models\MenuItem;
-use Livewire\Attributes\On;
+use App\Models\Order;
+use App\Models\User;
 
 new class extends Component {
-    public $item_name;
-    public $price;
-    public $menu_items;
+    public $orders;
+    public $users;
 
     public function mount() {
-        $this->menu_items = MenuItem::all();
+        $this->orders = Order::all();
+        $this->users = User::all();
     }
-
-    #[On('menu-items-updated')]
-    public function getMenuItems() {
-        $this->menu_items = MenuItem::all();
-    }
-
 }; ?>
 
 <div>
@@ -36,24 +30,27 @@ new class extends Component {
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Taken At</th>
+                    <th scope="col">Taken By</th>
+                    <th scope="col">Total Price</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
 
             <tbody class="table-group-divider">
-                @foreach ($menu_items as $menu_item)
-                <tr wire:key="menu-item-{{ $menu_item->id }}">
-
-                    <th scope="row">{{ $menu_item->id }}</th>
-                    <td>{{ $menu_item->item_name }}</td>
-                    <td>{{ $menu_item->price }}</td>
+                @foreach ($orders as $order)
+                <tr>
+                    <th scope="row">{{ $order->id }}</th>
+                    <td>{{ $order->created_at }}</td>
+                    <td>
+                        @foreach ($users as $user)
+                        @if ($user->id == $order->taken_by)
+                        {{ $user->name }}
+                        @endif
+                        @endforeach
+                    </td>
+                    <td>{{ $order->total_price }}</td>
                     <td class="d-flex">
-                        <button class="btn btn-primary ms-2" type="button"
-                            href="{{ route('menu-item-ingredients', ['id' => $menu_item->id]) }}" wire:navigate>
-                            <span class="bi bi-eye-fill"> View Ingredients</span>
-                        </button>
                         <button class="btn btn-primary ms-2" type="button">
                             <span class="bi bi-pencil-square"> Edit</span>
                         </button>
@@ -61,7 +58,6 @@ new class extends Component {
                             wire:confirm="Are you sure you want to delete this item?">
                             <span class="bi bi-trash-fill"> Delete</span>
                         </button>
-
                     </td>
                 </tr>
                 @endforeach
@@ -69,3 +65,5 @@ new class extends Component {
         </table>
     </div>
 </div>
+
+

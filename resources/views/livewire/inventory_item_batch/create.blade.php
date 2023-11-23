@@ -22,7 +22,6 @@ new class extends Component {
     }
 
     public function store() {
-
         InventoryItemBatch::create([
             'stock' => $this->stock,
             'expiration_date' => $this->expiration_date,
@@ -30,6 +29,12 @@ new class extends Component {
             'category_id' => InventoryItem::find($this->inventory_item_id)->category_id,
             'unit_id' => InventoryItem::find($this->inventory_item_id)->unit_id,
         ]);
+
+        InventoryItem::find($this->inventory_item_id)->update([
+            'total_stock' => InventoryItem::find($this->inventory_item_id)->total_stock + $this->stock,
+        ]);
+        
+        $this->dispatch('inventory-item-batch-updated');
     }
 }; ?>
 

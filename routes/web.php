@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InventoryItemBatchController;
+use App\Http\Controllers\MenuItemIngredientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MenuController;
@@ -31,6 +32,10 @@ Route::get('inventory', [InventoryController::class, 'index'])
 Route::get('/inventory-item-batch/{id}', [InventoryItemBatchController::class, 'index'])
     ->middleware('auth')
     ->name('inventory-item-batch');
+
+Route::get('/menu-item-ingredients/{id}', [MenuItemIngredientController::class, 'index'])
+    ->middleware('auth')
+    ->name('menu-item-ingredients');
     
 Route::get('menu', [MenuController::class, 'index'])
     ->middleware(['auth'])

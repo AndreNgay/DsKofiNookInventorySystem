@@ -1,23 +1,15 @@
 <?php
 
 use Livewire\Volt\Component;
-use App\Models\MenuItem;
-use Livewire\Attributes\On;
+use Livewire\Attributes\On; 
+use App\Models\MenuItemIngredient;
 
 new class extends Component {
-    public $item_name;
-    public $price;
-    public $menu_items;
+    public $menu_item_ingredients;
 
-    public function mount() {
-        $this->menu_items = MenuItem::all();
+    public function mount($menu_item_id) {
+        $this->menu_item_ingredients = MenuItemIngredient::where('menu_item_id', $menu_item_id)->get();
     }
-
-    #[On('menu-items-updated')]
-    public function getMenuItems() {
-        $this->menu_items = MenuItem::all();
-    }
-
 }; ?>
 
 <div>
@@ -26,9 +18,9 @@ new class extends Component {
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Inventory Item</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Category</th>
                 </tr>
             </thead>
 
@@ -59,3 +51,4 @@ new class extends Component {
         </table>
     </div>
 </div>
+

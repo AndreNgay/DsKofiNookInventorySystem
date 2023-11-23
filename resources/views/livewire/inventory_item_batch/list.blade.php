@@ -5,6 +5,7 @@ use App\Models\InventoryItem;
 use App\Models\InventoryItemBatch;
 use App\Models\Category;
 use App\Models\Unit;
+use Livewire\Attributes\On; 
 
 new class extends Component {
     public $inventory_item_batches;
@@ -17,6 +18,11 @@ new class extends Component {
         $this->inventory_item_batches = InventoryItemBatch::where('inventory_item_id', $this->inventory_item_id)->get();
         $this->categories = Category::all();
         $this->units = Unit::all();
+    }
+
+    #[On('inventory-item-batch-updated')]
+    public function inventoryItemBatchUpdated() {
+        $this->inventory_item_batches = InventoryItemBatch::where('inventory_item_id', $this->inventory_item_id)->get();
     }
 
 

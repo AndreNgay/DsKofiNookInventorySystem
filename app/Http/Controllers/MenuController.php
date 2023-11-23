@@ -11,7 +11,7 @@ class MenuController extends Controller
         $role = Auth::user()->role;
 
         if($role == 'employee' || $role == 'owner' || $role == 'supplier') {    
-            return view('pages.menu_item');
+            return view('livewire.menu_item.page');
         }
         else if($role == 'account admin') {
             return redirect()->route('account-admin.dashboard');

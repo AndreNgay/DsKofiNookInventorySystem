@@ -51,7 +51,6 @@ new class extends Component {
                     <th scope="col">Item Name</th>
                     <th scope="col">Category</th>
                     <th scope="col">Total Stock</th>
-                    <th scope="col">Unit</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -68,8 +67,8 @@ new class extends Component {
                         @endif
                         @endforeach
                     </td>
-                    <td>{{ $inventory_item->total_stock }}</td>
                     <td>
+                        {{ $inventory_item->total_stock }}
                         @foreach ($units as $unit)
                         @if($unit->id == $inventory_item->unit_id)
                         {{ $unit->unit_name }}

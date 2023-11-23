@@ -11,7 +11,7 @@ class InventoryController extends Controller
         $role = Auth::user()->role;
 
         if($role == 'employee' || $role == 'owner' || $role == 'supplier') {    
-            return view('pages.inventory_item');
+            return view('livewire.inventory_item.page');
         }
         else if($role == 'account admin') {
             return redirect()->route('account-admin.dashboard');

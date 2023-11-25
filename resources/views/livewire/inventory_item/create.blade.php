@@ -11,6 +11,8 @@ new class extends Component {
     public $item_name;
     public $category_id;
     public $unit_id;
+    public $stock_reminder;
+    public $days_before_expiration_reminder;
     public $hidden = 'hidden';
     public $categories;
     public $units;
@@ -24,15 +26,23 @@ new class extends Component {
     }
 
     public function store() {
-        $this->validate(['item_name' => 'required|string|max:255']);
+        $this->validate([
+            'item_name' => 'required|string|max:255',
+            'stock_reminder' => 'nullable|integer|min:0',
+            'days_before_expiration_reminder' => 'nullable|integer|min:0',
+        ]);
 
         InventoryItem::create([
             'item_name' => $this->item_name,
             'category_id' => $this->category_id,
             'unit_id' => $this->unit_id,
+            'stock_reminder' => $this->stock_reminder,
+            'days_before_expiration_reminder' => $this->days_before_expiration_reminder,
         ]);
 
         $this->item_name = '';
+        $this->stock_reminder = null;
+        $this->days_before_expiration_reminder = null;
         $this->category_id = Category::first()->id;
         $this->category_id = Category::first()->id;
         $this->unit_id = Unit::first()->id;
@@ -46,10 +56,12 @@ new class extends Component {
 
     public function toggleForm() {
         $this->item_name = '';
-        if($this->hidden == '') {
+        $this->stock_reminder = null;
+        $this->days_before_expiration_reminder = null;
+
+        if ($this->hidden == '') {
             $this->hidden = 'hidden';
-        }
-        else {
+        } else {
             $this->hidden = '';
         }
     }
@@ -67,6 +79,22 @@ new class extends Component {
                 <label class="form-label">Item Name</label>
                 <input type="text" class="form-control" wire:model="item_name">
                 @error('item_name') 
+                <p class="text-danger">{{ $message }}</p> 
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Stock Reminder</label>
+                <input type="number" class="form-control" wire:model="stock_reminder">
+                @error('stock_reminder') 
+                <p class="text-danger">{{ $message }}</p> 
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Days Before Expiration Reminder</label>
+                <input type="number" class="form-control" wire:model="days_before_expiration_reminder">
+                @error('days_before_expiration_reminder') 
                 <p class="text-danger">{{ $message }}</p> 
                 @enderror
             </div>

@@ -71,15 +71,34 @@ body {
   background-color: #111;
   padding-top: 20px;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar h2 {
+  margin-bottom: 20px;
 }
 
 #sidebar a {
   padding: 10px;
   text-decoration: none;
+  transition: 0.3s;
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+}
+
+.link-item i {
+  margin-right: 10px;
+  font-size: 19px;
+  color: #deb887;
+}
+
+.link-text {
   font-size: 18px;
   color: #818181;
-  display: block;
-  transition: 0.3s;
 }
 
 #sidebar a:hover {
@@ -95,6 +114,8 @@ body {
   position: absolute;
   bottom: 20px;
 }
+
+
 
 .btn-burlywood {
   background: #3498db;

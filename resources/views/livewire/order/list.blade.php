@@ -15,7 +15,7 @@ new class extends Component {
 }; ?>
 
 <div>
-<div class="mb-2">
+    <div class="mb-2">
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search by item name" aria-label="Search"
                 id="query" name="query">
@@ -24,7 +24,7 @@ new class extends Component {
             </button>
         </form>
     </div>
-    
+
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -61,9 +61,56 @@ new class extends Component {
                     </td>
                 </tr>
                 @endforeach
+
+                <!-- Additional Dummy Data -->
+                <tr>
+                    <th scope="row">4</th>
+                    <td>2023-10-15</td>
+                    <td>John Doe</td>
+                    <td>$25.50</td>
+                    <td class="d-flex">
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="bi bi-pencil-square"> Edit</span>
+                        </button>
+                        <button type="button" class="btn btn-primary ms-2" wire:click="delete"
+                            wire:confirm="Are you sure you want to delete this item?">
+                            <span class="bi bi-trash-fill"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">5</th>
+                    <td>2023-11-02</td>
+                    <td>Jane Smith</td>
+                    <td>$18.75</td>
+                    <td class="d-flex">
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="bi bi-pencil-square"> Edit</span>
+                        </button>
+                        <button type="button" class="btn btn-primary ms-2" wire:click="delete"
+                            wire:confirm="Are you sure you want to delete this item?">
+                            <span class="bi bi-trash-fill"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">6</th>
+                    <td>2023-11-18</td>
+                    <td>Robert Johnson</td>
+                    <td>$30.00</td>
+                    <td class="d-flex">
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="bi bi-pencil-square"> Edit</span>
+                        </button>
+                        <button type="button" class="btn btn-primary ms-2" wire:click="delete"
+                            wire:confirm="Are you sure you want to delete this item?">
+                            <span class="bi bi-trash-fill"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-

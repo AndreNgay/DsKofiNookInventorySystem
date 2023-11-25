@@ -93,12 +93,96 @@ new class extends Component {
                     </td>
                 </tr>
 
+                <!-- Additional Dummy Data -->
+                <tr>
+                    <th>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Espresso</option>
+                            <option value="1">One</option>
+                        </select>
+                    </th>
+                    <td>$2.50</td>
+                    <td>
+                        <input type="number" class="form-control" value="2">
+                    </td>
+
+                    <td class="d-flex">
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="">+</span>
+                        </button>
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="">-</span>
+                        </button>
+                        <button type="button" class="btn btn-primary ms-2" wire:click="delete"
+                            wire:confirm="Are you sure you want to delete this item?">
+                            <span class="bi bi-trash-fill"></span>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Iced Tea</option>
+                            <option value="1">One</option>
+                        </select>
+                    </th>
+                    <td>$2.00</td>
+                    <td>
+                        <input type="number" class="form-control" value="3">
+                    </td>
+
+                    <td class="d-flex">
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="">+</span>
+                        </button>
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="">-</span>
+                        </button>
+                        <button type="button" class="btn btn-primary ms-2" wire:click="delete"
+                            wire:confirm="Are you sure you want to delete this item?">
+                            <span class="bi bi-trash-fill"></span>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Cappuccino</option>
+                            <option value="1">One</option>
+                        </select>
+                    </th>
+                    <td>$3.50</td>
+                    <td>
+                        <input type="number" class="form-control" value="1">
+                    </td>
+
+                    <td class="d-flex">
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="">+</span>
+                        </button>
+                        <button class="btn btn-primary ms-2" type="button">
+                            <span class="">-</span>
+                        </button>
+                        <button type="button" class="btn btn-primary ms-2" wire:click="delete"
+                            wire:confirm="Are you sure you want to delete this item?">
+                            <span class="bi bi-trash-fill"></span>
+                        </button>
+                    </td>
+                </tr>
+
                 <tr>
                     <th>
                         <select class="form-select" aria-label="Default select example">
                             <option selected>New Item</option>
-                            <option value="1">One</option>
+                            <option value="1">Latte</option>
+                            <option value="1">Black Coffee</option>
+                            <option value="1">Espresso</option>
+                            <option value="1">Iced Tea</option>
+                            <option value="1">Cappucino</option>
                         </select>
+                        
                     </th>
                     <td>$0.00</td>
                     <td>
@@ -123,7 +207,7 @@ new class extends Component {
         </table>
     </div>
     <div class="d-flex justify-content-end">
-        <h3>Total Price: $12</h3>
+        <h3>Total Price: $20.50</h3>
     </div>
     <hr />
 
@@ -135,5 +219,6 @@ new class extends Component {
             <livewire:components.buttons.submit />
         </div>
     </div>
+
 
 </div>

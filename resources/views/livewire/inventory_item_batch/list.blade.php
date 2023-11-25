@@ -12,12 +12,14 @@ new class extends Component {
     public $inventory_item_id;
     public $categories;
     public $units;
+    public $current_date;
 
     public function mount()
     {
         $this->inventory_item_batches = InventoryItemBatch::where('inventory_item_id', $this->inventory_item_id)->get();
         $this->categories = Category::all();
         $this->units = Unit::all();
+        $this->current_date = now();
     }
 
     #[On('inventory-item-batch-updated')]
@@ -29,7 +31,8 @@ new class extends Component {
 }; ?>
 
 <div>
-<div class="mb-2">
+{{ $current_date }}
+    <div class="mb-2">
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search by item name" aria-label="Search"
                 id="query" name="query">
@@ -42,10 +45,11 @@ new class extends Component {
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Batch Number</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Category</th>
                     <th scope="col">Expiration Date</th>
+                    <th scope="col">Expires In</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -69,7 +73,11 @@ new class extends Component {
                         @endforeach
                     </td>
                     <td>{{ $inventory_item_batch->expiration_date }}</td>
-                    
+
+                    <td>
+                        {{ date_diff($inventory_item_batch->expiration_date, $current_date) }}
+                    </td>
+
                     <td>
                         <div class="d-flex">
                             <button class="btn btn-primary ms-2" type="button"><span class="bi bi-pencil-square">

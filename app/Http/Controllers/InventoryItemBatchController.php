@@ -8,6 +8,12 @@ class InventoryItemBatchController extends Controller
 {
 
     public function index($inventory_item_id) {
+        // check if item exists
+        $inventory_item = InventoryItem::find($inventory_item_id);
+
+        if(!$inventory_item) {
+            return view('livewire.errors.404-not-found');
+        }
         $role = Auth::user()->role;
 
         if($role == 'employee' || $role == 'owner' || $role == 'supplier') {    

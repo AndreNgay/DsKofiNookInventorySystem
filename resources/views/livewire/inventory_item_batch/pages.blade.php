@@ -1,17 +1,18 @@
 <?php
 
 use Livewire\Volt\Component;
+use App\Models\InventoryItem;
 
 new class extends Component {
-    public $inventory_item_id = 2;
+    public $inventory_item_id;
     public $inventory_item_name = 'jeff';
 
     public function mount() {
-        $this->inventory_item_id = 3;
+        $inventory_item_id = 2;
+        $this->inventory_item_name = InventoryItem::where('id', $this->inventory_item_id)->first()->item_name;
     }
-
-}; ?>
-
+}
+?>
 
 @extends('layouts.app')
 @section('content')
@@ -26,4 +27,5 @@ new class extends Component {
     </div>
 </div>
 @endsection
+
 

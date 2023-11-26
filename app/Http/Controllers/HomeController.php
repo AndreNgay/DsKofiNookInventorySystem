@@ -27,7 +27,7 @@ class HomeController extends Controller
         $role = Auth::user()->role;
 
         if($role == 'employee' || $role == 'owner' || $role == 'supplier') {    
-            return view('pages.inventory.inventory');
+            return view('livewire.home.page');
         }
         else if($role == 'account admin') {
             return redirect()->route('account-admin.dashboard');

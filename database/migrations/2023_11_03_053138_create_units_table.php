@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('unit_name');
-            $table->string('unit_symbol');
             $table->string('unit_conversion');
+            $table->boolean('default_unit')->default(false);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

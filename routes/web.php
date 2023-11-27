@@ -38,9 +38,7 @@ Route::get('/inventory-items', App\Livewire\InventoryItems\Page::class)
     ->middleware('auth')
     ->name('inventory-items');
 
-Route::get('/inventory-item-create', App\Livewire\InventoryItems\Create::class)
-    ->middleware('auth')
-    ->name('inventory-item-create');
+
 
 // Inventory Item Batches
 Route::get('/batches-inventory-item/{id}', App\Livewire\InventoryItemBatches\Page::class)
@@ -63,9 +61,7 @@ Route::get('/order-create', App\Livewire\Orders\Create::class)
 Route::get('/menu-items', App\Livewire\MenuItems\Page::class)
     ->middleware('auth')
     ->name('menu-items');
-Route::get('/menu-item-create', App\Livewire\MenuItems\Create::class)
-    ->middleware('auth')
-    ->name('menu-item-create');
+
 
 // Menu Item Ingredients
 Route::get('/ingredients-menu-item/{id}', App\Livewire\MenuItemIngredients\Page::class)

@@ -1,10 +1,15 @@
 <div>
+    @include('livewire.menu-items.create-modal')
     <div class="row">
         <div class="col-md-10">
             <h2>Menu Items</h2>
         </div>
         <div class="col-md-2">
-            <a href="{{ route('menu-item-create') }}" class="btn btn-primary w-100" wire:navigate>Add Menu Item</a>
+            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#createMenuItem">
+                Create Menu Item
+            </button>
+
         </div>
     </div>
     <hr />
@@ -30,7 +35,8 @@
 
                         <td>
                             <div class="d-flex">
-                                <button class="btn btn-primary ms-2" type="button" href="{{ route('ingredients-menu-item', ['id' => $menu_item->id]) }}" wire:navigate>
+                                <button class="btn btn-primary ms-2" type="button"
+                                    href="{{ route('ingredients-menu-item', ['id' => $menu_item->id]) }}" wire:navigate>
                                     <i class="fas fa-solid fa-mortar-pestle">
                                     </i>
                                     View Ingredients

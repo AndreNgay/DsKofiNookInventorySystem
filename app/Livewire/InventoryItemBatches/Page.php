@@ -3,14 +3,12 @@
 namespace App\Livewire\InventoryItemBatches;
 
 use Livewire\Component;
-use Livewire\Attributes\Layout;
 use App\Models\Category;
 use App\Models\Unit;
 use App\Models\InventoryItemBatch;
 use App\Models\InventoryItem;
 use Illuminate\Support\Facades\Route;
 
-#[Layout('layouts.app')]
 class Page extends Component
 {
     public $inventory_item_id;

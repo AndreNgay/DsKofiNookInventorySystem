@@ -7,11 +7,10 @@ use App\Models\InventoryItem;
 use App\Models\MenuItemIngredient;
 use App\Models\Unit;
 use Livewire\Component;
-use Livewire\Attributes\Layout;
 use App\Models\MenuItem;
 use Illuminate\Support\Facades\Route;
 
-#[Layout('layouts.app')] 
+
 
 class Create extends Component
 {

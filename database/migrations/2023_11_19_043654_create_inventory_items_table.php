@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('inventory_items', function (Blueprint $table) {
             $table->id();
             $table->string('item_name');
+            $table->string('stock_reminder');
+            $table->string('expiration_reminder');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('unit_id');
             $table->integer('total_stock')->nullable()->default(0);

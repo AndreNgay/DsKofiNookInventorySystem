@@ -63,20 +63,20 @@ class DatabaseSeeder extends Seeder
         Unit::create([
             'category_id' => 1,
             'unit_name' => 'Mililiters',
-            'unit_symbol' => 'ml',
             'unit_conversion' => 1,
+            'default_unit' => true
         ]);
         Unit::create([
             'category_id' => 2,
             'unit_name' => 'Grams',
-            'unit_symbol' => 'g',
             'unit_conversion' => 1,
+            'default_unit' => true
         ]);
         Unit::create([
             'category_id' => 3,
             'unit_name' => 'Pieces',
-            'unit_symbol' => 'pcs',
             'unit_conversion' => 1,
+            'default_unit' => true
         ]);
 
     }

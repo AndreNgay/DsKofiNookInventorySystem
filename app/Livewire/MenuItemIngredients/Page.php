@@ -8,10 +8,8 @@ use App\Models\InventoryItem;
 use App\Models\MenuItem;
 use App\Models\MenuItemIngredient;
 use Livewire\Component;
-use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Route;
 
-#[Layout('layouts.app')] 
 
 class Page extends Component
 {

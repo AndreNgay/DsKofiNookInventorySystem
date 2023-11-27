@@ -1,11 +1,16 @@
 <div>
+    @include('livewire.inventory-items.create-modal')
     <div class="row">
         <div class="col-md-10">
             <h2>Inventory Items</h2>
         </div>
         <div class="col-md-2">
-            <a href="{{ route('inventory-item-create') }}"
-                class="btn btn-primary w-100" wire:navigate>Add Inventory item</a>
+            <!-- Button trigger modal -->
+            
+            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#createInventoryItem" wire:click="createInventoryItemClicked">
+                Create Inventory Item
+            </button>
         </div>
     </div>
     <hr />
@@ -79,4 +84,6 @@
             </table>
         </div>
     </div>
+
+    
 </div>

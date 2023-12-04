@@ -1,13 +1,25 @@
 <div>
+    @include('livewire.menu-item-ingredients.create-modal')
+    @include('livewire.menu-item-ingredients.edit-modal')
+    @include('livewire.menu-item-ingredients.delete-modal')
     <div class="row">
         <div class="col-md-10">
-            <h2>{{ $menu_item->item_name }} Ingredients</h2>
+            <h2>{{ $menu_item->item_name ?? 'Unknown Item' }} Ingredients</h2>
         </div>
+
         <div class="col-md-2">
-            <a href="{{ route('menu-item-ingredient-create', ['id' => $menu_item->id]) }}" class="btn btn-primary w-100" wire:navigate>Add Ingredient</a>
+            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#createMenuItemIngredient">
+                Add Ingredient
+            </button>
         </div>
     </div>
     <hr />
+    @if (session()->has('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+    @endif
 
     <div class="row">
         <div class="table-responsive">
@@ -42,7 +54,7 @@
                             @endforeach
                         </td>
                         <td>
-                        {{ $menu_item_ingredient->amount }}
+                            {{ $menu_item_ingredient->amount }}
                             @foreach($units as $unit)
                             @if($unit->id == $menu_item_ingredient->unit_id)
                             {{ $unit->unit_name }}
@@ -52,10 +64,14 @@
 
                         <td>
                             <div class="d-flex">
-                                <button class="btn btn-primary ms-2" type="button"><span class="bi bi-pencil-square">
-                                        Edit</span></button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editUnit" wire:click="edit({{ $unit->id }})">
+                                    <span class="bi bi-pencil-square">
+                                        Edit</span>
+                                </button>
+
                                 <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                    data-bs-target="">
+                                    data-bs-target="#deleteUnit" wire:click="delete({{ $unit->id }})">
                                     <span class="bi bi-trash-fill"> Delete</span>
                                 </button>
                             </div>

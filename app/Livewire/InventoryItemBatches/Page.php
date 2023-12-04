@@ -17,8 +17,9 @@ class Page extends Component
     public $categories;
     public $units;
     public $current_date;
+    
 
-    public function mount()
+    public function render()
     {
         $this->inventory_item_id = Route::current()->parameter('id');
     
@@ -27,11 +28,6 @@ class Page extends Component
         $this->categories = Category::all();
         $this->units = Unit::all();
         $this->current_date = now()->timezone('Asia/Manila');
-    }
-    
-
-    public function render()
-    {
         return view('livewire.inventory-item-batches.page');
     }
 }

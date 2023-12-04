@@ -18,10 +18,16 @@ class Page extends Component
     }
 
     public function store() {
+        $this->validate([
+            'item_name' => 'required',
+            'price' => 'required|numeric',
+        ]);
+    
         MenuItem::create([
             'item_name' => $this->item_name,
             'price' => $this->price,
         ]);
+        // $this->resetValidation();
         $this->resetInputs();
     }
 

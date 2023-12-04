@@ -75,9 +75,7 @@ Route::get('/menu-item-ingredient-create/{id}', App\Livewire\MenuItemIngredients
 Route::get('/units', App\Livewire\Units\Page::class)
     ->middleware('auth')
     ->name('units');
-Route::get('/unit-create', App\Livewire\Units\Create::class)
-    ->middleware('auth')
-    ->name('unit-create');
+
     
 Route::get('menu', [MenuController::class, 'index'])
     ->middleware(['auth'])

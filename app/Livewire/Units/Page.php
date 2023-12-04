@@ -13,7 +13,7 @@ class Page extends Component
     public $dry_ingredients_default_unit, $liquids_default_unit, $counts_default_unit;
 
 
-    public $unit_name, $category_id = 1, $unit_conversion;
+    public $id, $unit_name, $category_id, $unit_conversion;
     
     public function render()
     {
@@ -41,7 +41,39 @@ class Page extends Component
             'category_id' => $this->category_id,
             'unit_conversion' => $this->unit_conversion
         ]);
+    }
 
+    public function edit($id) {
+        $unit = Unit::find($id);
+        $this->id = $unit->id;
+        $this->unit_name = $unit->unit_name;
+        $this->category_id = $unit->category_id;
+        $this->unit_conversion = $unit->unit_conversion;
+    }
+
+    public function update() {
+        $this->validate([
+            'unit_name' => 'required',
+            'category_id' => 'required',
+            'unit_conversion' => 'required'
+        ]);
+
+        $unit = Unit::find($this->id);
+        $unit->update([
+            'unit_name' => $this->unit_name,
+            'category_id' => $this->category_id,
+            'unit_conversion' => $this->unit_conversion
+        ]);
+    }
+
+    public function delete($id) {
+        $unit = Unit::find($id);
+        $this->id = $unit->id;
+    }
+
+    public function destroy() {
+        $unit = Unit::find($this->id);
+        $unit->delete();
     }
 
 }

@@ -1,5 +1,7 @@
 <div>
     @include('livewire.units.create-modal')
+    @include('livewire.units.edit-modal')
+    @include('livewire.units.delete-modal')
     <div class="row">
         <div class="col-md-10">
             <h2>Units List</h2>
@@ -47,16 +49,17 @@
                             @elseif($unit->category_id == 3)
                             Pieces
                             @endif
-                            
-
-
                         </td>
                         <td>
                             <div class="d-flex">
-                                <button class="btn btn-primary ms-2" type="button"><span class="bi bi-pencil-square">
-                                        Edit</span></button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editUnit" wire:click="edit({{ $unit->id }})">
+                                    <span class="bi bi-pencil-square">
+                                        Edit</span>
+                                </button>
+
                                 <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                    data-bs-target="">
+                                    data-bs-target="#deleteUnit" wire:click="delete({{ $unit->id }})">
                                     <span class="bi bi-trash-fill"> Delete</span>
                                 </button>
                             </div>

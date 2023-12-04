@@ -20,7 +20,6 @@ class Page extends Component
 
     public function mount()
     {
-        // Retrieve the 'id' parameter from the current route
         $this->inventory_item_id = Route::current()->parameter('id');
     
         $this->inventory_item = InventoryItem::find($this->inventory_item_id);

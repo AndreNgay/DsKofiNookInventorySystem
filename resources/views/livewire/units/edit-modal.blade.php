@@ -1,10 +1,10 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="createUnit" tabindex="-1" aria-labelledby="createUnitLabel"
+<div wire:ignore.self class="modal fade" id="editUnit" tabindex="-1" aria-labelledby="editUnitLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="createUnitLabel">Create Unit</h1>
+                <h1 class="modal-title fs-5" id="editUnitLabel">Edit Unit</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -18,8 +18,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Category</label>
-                    <select class="form-select" wire:model="category_id" wire:change="categoryChanged">
-                        <option value="" selected>Select</option>
+                    <select class="form-select" wire:change="categoryChanged" wire:model="category_id">
                         @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                         @endforeach
@@ -59,7 +58,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" wire:click="store">Store</button>
+                <button type="button" class="btn btn-primary" wire:click="update" data-bs-dismiss="modal">Update</button>
             </div>
         </div>
     </div>

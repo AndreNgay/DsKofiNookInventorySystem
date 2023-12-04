@@ -41,6 +41,8 @@ class Page extends Component
             'category_id' => $this->category_id,
             'unit_conversion' => $this->unit_conversion
         ]);
+
+        session()->flash('message', 'Unit created successfully.');
     }
 
     public function edit($id) {
@@ -64,6 +66,7 @@ class Page extends Component
             'category_id' => $this->category_id,
             'unit_conversion' => $this->unit_conversion
         ]);
+        session()->flash('message', 'Unit updated successfully.');
     }
 
     public function delete($id) {
@@ -72,6 +75,6 @@ class Page extends Component
 
     public function destroy() {
         $this->unit->delete();
+        session()->flash('message', 'Unit deleted successfully.');
     }
-
 }

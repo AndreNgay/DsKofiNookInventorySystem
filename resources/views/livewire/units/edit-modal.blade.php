@@ -1,6 +1,5 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="editUnit" tabindex="-1" aria-labelledby="editUnitLabel"
-    aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="editUnit" tabindex="-1" aria-labelledby="editUnitLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,6 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+
                 <div class="mb-3">
                     <label class="form-label">Unit Name</label>
                     <input type="text" class="form-control" wire:model="unit_name">

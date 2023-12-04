@@ -33,6 +33,7 @@ class Page extends Component
             'price' => $this->price,
         ]);
         $this->resetInputs();
+        session()->flash('message', 'Menu Item created successfully.');
     }
 
     public function edit($id) {
@@ -53,6 +54,7 @@ class Page extends Component
             'item_name' => $this->item_name,
             'price' => $this->price,
         ]);
+        session()->flash('message', 'Menu Item updated successfully.');
     }
 
     public function delete($id) {
@@ -61,6 +63,7 @@ class Page extends Component
 
     public function destroy() {
         $this->menu_item->delete();
+        session()->flash('message', 'Menu Item deleted successfully.');
     }
 
 }

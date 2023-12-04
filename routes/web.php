@@ -67,9 +67,6 @@ Route::get('/menu-items', App\Livewire\MenuItems\Page::class)
 Route::get('/ingredients-menu-item/{id}', App\Livewire\MenuItemIngredients\Page::class)
     ->middleware('auth')
     ->name('ingredients-menu-item');
-Route::get('/menu-item-ingredient-create/{id}', App\Livewire\MenuItemIngredients\Create::class)
-    ->middleware('auth')
-    ->name('menu-item-ingredient-create');
 
 // Units
 Route::get('/units', App\Livewire\Units\Page::class)

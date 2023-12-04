@@ -1,5 +1,7 @@
 <div>
     @include('livewire.inventory-items.create-modal')
+    @include('livewire.inventory-items.edit-modal')
+    @include('livewire.inventory-items.delete-modal')
     <div class="row">
         <div class="col-md-10">
             <h2>Inventory Items</h2>
@@ -75,10 +77,14 @@
                                     <span class="bi bi-clock-fill"> View History</span>
                                 </button>
 
-                                <button class="btn btn-primary ms-2" type="button"><span class="bi bi-pencil-square">
-                                        Edit</span></button>
                                 <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                    data-bs-target="">
+                                    data-bs-target="#editInventoryItem" wire:click="edit({{ $inventory_item->id }})">
+                                    <span class="bi bi-pencil-square">
+                                        Edit</span>
+                                </button>
+
+                                <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
+                                    data-bs-target="#deleteInventoryItem" wire:click="delete({{ $inventory_item->id }})">
                                     <span class="bi bi-trash-fill"> Delete</span>
                                 </button>
                             </div>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('amount');
 
             $table->timestamps();
-            $table->foreign('inventory_item_id')->references('id')->on('inventory_items')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('inventory_item_id')->references('id')->on('inventory_items')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('menu_item_id')->references('id')->on('menu_items')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('unit_id')->references('id')->on('units')->onUpdate('cascade')->onDelete('restrict');

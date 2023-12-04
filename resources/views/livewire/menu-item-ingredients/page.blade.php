@@ -64,7 +64,7 @@
 
                         <td>
                             <div class="d-flex">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#editUnit" wire:click="edit({{ $unit->id }})">
                                     <span class="bi bi-pencil-square">
                                         Edit</span>

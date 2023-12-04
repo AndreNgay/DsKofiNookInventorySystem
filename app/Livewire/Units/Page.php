@@ -13,7 +13,7 @@ class Page extends Component
     public $dry_ingredients_default_unit, $liquids_default_unit, $counts_default_unit;
 
 
-    public $id, $unit_name, $category_id, $unit_conversion;
+    public $unit, $id, $unit_name, $category_id, $unit_conversion;
     
     public function render()
     {
@@ -67,13 +67,11 @@ class Page extends Component
     }
 
     public function delete($id) {
-        $unit = Unit::find($id);
-        $this->id = $unit->id;
+        $this->unit = Unit::find($id);
     }
 
     public function destroy() {
-        $unit = Unit::find($this->id);
-        $unit->delete();
+        $this->unit->delete();
     }
 
 }

@@ -64,3 +64,9 @@
         </div>
     </div>
 </div>
+
+<script>
+ window.livewire.on('close-modal', () => {
+     $('#createUnit').modal('hide');
+ })
+ </script>

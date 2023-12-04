@@ -1,12 +1,13 @@
 <div>
     @include('livewire.menu-items.create-modal')
+    @include('livewire.menu-items.edit-modal')
+    @include('livewire.menu-items.delete-modal')
     <div class="row">
         <div class="col-md-10">
             <h2>Menu Items</h2>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
-                data-bs-target="#createMenuItem">
+            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createMenuItem">
                 Create Menu Item
             </button>
 
@@ -42,10 +43,14 @@
                                     View Ingredients
                                 </button>
 
-                                <button class="btn btn-primary ms-2" type="button"><span class="bi bi-pencil-square">
-                                        Edit</span></button>
                                 <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                    data-bs-target="">
+                                    data-bs-target="#editMenuItem" wire:click="edit({{ $menu_item->id }})">
+                                    <span class="bi bi-pencil-square">
+                                        Edit</span>
+                                </button>
+
+                                <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
+                                    data-bs-target="#deleteMenuItem" wire:click="delete({{ $menu_item->id }})">
                                     <span class="bi bi-trash-fill"> Delete</span>
                                 </button>
                             </div>

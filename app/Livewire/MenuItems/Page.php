@@ -4,6 +4,8 @@ namespace App\Livewire\MenuItems;
 
 use Livewire\Component;
 use App\Models\MenuItem;
+use Illuminate\Database\QueryException;
+
 
 
 class Page extends Component
@@ -20,6 +22,10 @@ class Page extends Component
     public function resetInputs() {
         $this->item_name = '';
         $this->price = '';
+    }
+
+    public function create() {
+        $this->resetInputs();
     }
 
     public function store() {
@@ -62,8 +68,18 @@ class Page extends Component
     }
 
     public function destroy() {
-        $this->menu_item->delete();
-        session()->flash('message', 'Menu Item deleted successfully.');
+        try {
+            $this->menu_item->delete();
+            session()->flash('success', 'Menu Item deleted successfully.');
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1451) {
+                session()->flash('error', 'Cannot delete this menu item. It is being referenced by other records.');
+            } else {
+                session()->flash('error', 'An error occurred while trying to delete the menu item.');
+            }
+        }
+    
+        return redirect()->route('menu-items');
     }
 
 }

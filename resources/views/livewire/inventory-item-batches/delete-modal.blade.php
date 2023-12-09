@@ -1,13 +1,13 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="deleteUnit" tabindex="-1" aria-labelledby="deleteUnitLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="deleteInventoryItemBatch" tabindex="-1" aria-labelledby="deleteInventoryItemBatchLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deleteUnitLabel">Delete Unit</h1>
+        <h1 class="modal-title fs-5" id="deleteInventoryItemBatchLabel">Delete Unit</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete this unit?
+        Are you sure you want to delete this ingredient?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

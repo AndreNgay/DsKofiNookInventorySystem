@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -27,10 +28,10 @@
             <!-- Home -->
             <div class="row">
                 <div class="col-md-1 link-item">
-                    <a href="/home" wire:navigate><i class="fas fa-solid fa-house"></i></a>
+                    <a href="/home" ><i class="fas fa-solid fa-house"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/home" wire:navigate class="link-text"> Home</a>
+                    <a href="/home"  class="link-text"> Home</a>
                 </div>
             </div>
 
@@ -40,7 +41,7 @@
                     <a href="/inventory-items"><i class="fas fa-solid fa-box-open"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/inventory-items" wire:navigate class="link-text"> Inventory</a>
+                    <a href="/inventory-items"  class="link-text"> Inventory</a>
                 </div>
             </div>
 
@@ -50,7 +51,7 @@
                     <a href="/orders"><i class="fas fa-solid fa-cart-shopping"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/orders" wire:navigate class="link-text"> Orders</a>
+                    <a href="/orders"  class="link-text"> Orders</a>
                 </div>
             </div>
 
@@ -62,7 +63,7 @@
                     <a href="/menu-items"><i class="fas fa-solid fa-mug-saucer"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/menu-items" wire:navigate class="link-text"> Menu</a>
+                    <a href="/menu-items"  class="link-text"> Menu</a>
                 </div>
             </div>
 
@@ -72,7 +73,7 @@
                     <a href="/units"><i class="fa-solid fa-scale-unbalanced-flip"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/units" wire:navigate class="link-text"> Units</a>
+                    <a href="/units"  class="link-text"> Units</a>
                 </div>
             </div>
 
@@ -82,40 +83,44 @@
                     <a href="/accounts"><i class="fas fa-solid fa-user-tie"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/accounts" wire:navigate class="link-text"> Accounts</a>
+                    <a href="/accounts"  class="link-text"> Accounts</a>
                 </div>
             </div>
 
-            <!-- Edit Profile -->
-            <div class="row">
-                <div class="col-md-1 link-item">
-                    <a href="#edit-profile"><i class="fas fa-user-edit"></i></a>
-                </div>
-                <div class="col-md-1 link-item">
-                    <a href="#edit-profile" class="link-text"> Profile</a>
-                </div>
-            </div>
-
-            <!-- Logout -->
             <div class="row">
                 <div class="col-md-1 link-item">
                     <a href="{{ route('logout') }}" id="logout"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i class="bi bi-person-circle"></i>
                     </a>
                 </div>
+
                 <div class="col-md-1 link-item">
-                    <a href="{{ route('logout') }}" id="logout"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="link-text">
-                        Logout
+                    <a id="logout" class="link-text" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name }} <i class="fas fa-caret-down"></i>
+                        <!-- Badge for user notifications -->
+                        <span class="badge bg-danger">3</span>
                     </a>
+
+                    <ul class="dropdown-menu">
+                        <!-- Badge for notifications dropdown item -->
+                        <li><button class="dropdown-item" type="button">Notifications <span class="badge bg-danger">3</span></button></li>
+                        <li><button class="dropdown-item" type="button">Profile</button></li>
+                        <li>
+                            <button class="dropdown-item" type="button" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </button>
+                        </li>
+                    </ul>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    
                 </div>
             </div>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
+
         </div>
 
         <div id="content">
@@ -127,6 +132,8 @@
         </div>
         @endif
     </div>
+
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

@@ -29,6 +29,17 @@ class Page extends Component
         
     }
 
+    public function resetInputs() {
+        $this->id = '';
+        $this->unit_name = '';
+        $this->category_id = '';
+        $this->unit_conversion = '';
+    }
+
+    public function create() {
+        $this->resetInputs();
+    }
+
     public function store() {
         $this->validate([
             'unit_name' => 'required',
@@ -42,7 +53,8 @@ class Page extends Component
             'unit_conversion' => $this->unit_conversion
         ]);
 
-        session()->flash('message', 'Unit created successfully.');
+        session()->flash('message', "Unit " . $this->unit_name . " created successfully.");
+        $this->resetInputs();
     }
 
     public function edit($id) {
@@ -73,6 +85,7 @@ class Page extends Component
         $this->unit = Unit::find($id);
     }
 
+    // to add: if unit is default, can't be delete
     public function destroy() {
         $this->unit->delete();
         session()->flash('message', 'Unit deleted successfully.');

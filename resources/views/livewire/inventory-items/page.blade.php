@@ -22,6 +22,7 @@
     </div>
     @endif
 
+
     <div class="row mb-2">
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search by item name" aria-label="Search"
@@ -73,7 +74,7 @@
                                     <span class="bi bi-eye-fill"> View Batches</span>
                                 </button>
 
-                                <button class="btn btn-primary ms-2" type="button" href="/item-history" wire:navigate>
+                                <button class="btn btn-primary ms-2" type="button" href="/histories-inventory-item" wire:navigate>
                                     <span class="bi bi-clock-fill"> View History</span>
                                 </button>
 

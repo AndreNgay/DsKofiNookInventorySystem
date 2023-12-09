@@ -7,8 +7,8 @@
             <h2>Menu Items</h2>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createMenuItem">
-                Create Menu Item
+            <button wire:click="create" type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createMenuItem">
+                Add New Menu Item
             </button>
 
         </div>
@@ -19,6 +19,21 @@
         {{ session('message') }}
     </div>
     @endif
+    @if (session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
+    <div class="row mb-2">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search by item name" aria-label="Search"
+                id="query" name="query">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+    </div>
 
     <div class="row">
         <div class="table-responsive">

@@ -7,8 +7,8 @@
             <h2>Units List</h2>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createUnit">
-                Create Unit
+            <button wire:click="create" type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createUnit">
+                Add New Unit
             </button>
         </div>
     </div>
@@ -18,6 +18,16 @@
         {{ session('message') }}
     </div>
     @endif
+
+    <div class="row mb-2">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search by unit name" aria-label="Search"
+                id="query" name="query">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+    </div>
 
     <div class="row">
         <div class="table-responsive">

@@ -1,15 +1,25 @@
 <div>
+    @include('livewire.inventory-item-batches.create-modal')
+    @include('livewire.inventory-item-batches.edit-modal')
+    @include('livewire.inventory-item-batches.delete-modal')
     <div class="row">
         <div class="col-md-10">
             <h2>Batches for {{ $inventory_item->item_name }}</h2>
         </div>
         <div class="col-md-2">
-            <a href="{{ route('inventory-item-batch-create', ['id' => $inventory_item->id]) }}"
-                class="btn btn-primary w-100" wire:navigate>Add
-                Batch</a>
+            <button wire:click="create" type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#createInventoryItemBatch">
+                Add New Ingredient
+            </button>
         </div>
     </div>
     <hr />
+    @if (session()->has('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+</div>
+@endif
+
 
     <div>
         <div class="mb-2">
@@ -68,10 +78,16 @@
 
                         <td>
                             <div class="d-flex">
-                                <button class="btn btn-primary ms-2" type="button"><span class="bi bi-pencil-square">
-                                        Edit</span></button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editInventoryItemBatch"
+                                    wire:click="edit({{ $inventory_item_batch->id }})">
+                                    <span class="bi bi-pencil-square">
+                                        Edit</span>
+                                </button>
+
                                 <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                    data-bs-target="">
+                                    data-bs-target="#deleteInventoryItemBatch"
+                                    wire:click="delete({{ $inventory_item_batch->id }})">
                                     <span class="bi bi-trash-fill"> Delete</span>
                                 </button>
                             </div>

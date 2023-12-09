@@ -10,6 +10,7 @@
                 <div class="mb-3">
                     <label class="form-label">Inventory Item</label>
                     <select class="form-select" wire:model="inventory_item_id" wire:change="inventoryItemChanged">
+                        <option selected>Select</option>
                         @foreach ($inventory_items as $inventory_item)
                         <option value="{{ $inventory_item->id }}">{{ $inventory_item->item_name }}</option>
                         @endforeach

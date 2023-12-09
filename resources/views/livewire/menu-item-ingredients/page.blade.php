@@ -8,9 +8,9 @@
         </div>
 
         <div class="col-md-2">
-            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+            <button wire:click="create" type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
                 data-bs-target="#createMenuItemIngredient">
-                Add Ingredient
+                Add New Ingredient
             </button>
         </div>
     </div>
@@ -65,13 +65,13 @@
                         <td>
                             <div class="d-flex">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#editUnit" wire:click="edit({{ $unit->id }})">
+                                    data-bs-target="#editMenuItemIngredient" wire:click="edit({{ $menu_item_ingredient->id }})">
                                     <span class="bi bi-pencil-square">
                                         Edit</span>
                                 </button>
 
                                 <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                    data-bs-target="#deleteUnit" wire:click="delete({{ $unit->id }})">
+                                    data-bs-target="#deleteMenuItemIngredient" wire:click="delete({{ $menu_item_ingredient->id }})">
                                     <span class="bi bi-trash-fill"> Delete</span>
                                 </button>
                             </div>

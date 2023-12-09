@@ -27,17 +27,20 @@
                             @enderror
                         </div>
 
-                        <div class="d-flex justify-content-end">
-                            <div wire:click="toggleForm">
-                                <livewire:components.buttons.close />
+                        <div class="mb-3">
+
+
+                            <div class="d-flex justify-content-end">
+                                <div wire:click="toggleForm">
+                                    <livewire:components.buttons.close />
+                                </div>
+                                <form wire:submit="store">
+                                    <livewire:components.buttons.submit />
+                                </form>
                             </div>
-                            <form wire:submit="store">
-                                <livewire:components.buttons.submit />
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('batch_number')->default(0);
             $table->unsignedBigInteger('inventory_item_id');
-            $table->unsignedBigInteger('stock');
+            $table->decimal('stock', 10, 2); // Change 10 and 2 to your desired precision and scale
+
             $table->date('expiration_date');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('unit_id');

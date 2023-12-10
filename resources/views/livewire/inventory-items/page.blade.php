@@ -21,7 +21,11 @@
         {{ session('message') }}
     </div>
     @endif
-
+    @if (session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
 
     <div class="row mb-2">
         <form class="d-flex" role="search">

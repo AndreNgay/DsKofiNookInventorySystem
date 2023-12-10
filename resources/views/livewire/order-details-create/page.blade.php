@@ -5,9 +5,13 @@
 
     <div class="row">
         <div class="col-md-10">
-            <h2>Details for Order #{{ $order->id }}</h2>
+            <h2>Create New Order</h2>
         </div>
         <div class="col-md-2">
+            <button wire:click="create" type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                data-bs-target="#createOrderDetail">
+                Add Menu Item
+            </button>
         </div>
     </div>
     <hr />

@@ -19,25 +19,27 @@
                 <div class="mb-3">
                     <label class="form-label">Stock Reminder</label>
                     <input type="number" class="form-control" wire:model="stock_reminder">
-                    @error('stock_reminder')
-                    <p class="text-danger">{{ $message }}</p>
-                    @enderror
+
                     <small id="emailHelp" class="form-text text-muted">
                         Set the threshold for stock levels. You'll receive a reminder when the stock quantity
                         approaches this level, prompting you to restock.
                     </small>
+                    @error('stock_reminder')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Expiration Reminder</label>
                     <input type="number" class="form-control" wire:model="expiration_reminder">
-                    @error('expiration_reminder')
-                    <p class="text-danger">{{ $message }}</p>
-                    @enderror
+
                     <small id="emailHelp" class="form-text text-muted">
                         Specify the number of days before an item's expiration. Receive a reminder in advance to
                         manage expiring items effectively.
                     </small>
+                    @error('expiration_reminder')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
 
 
@@ -61,7 +63,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" wire:click="store">Store</button>
+                <button type="button" class="btn btn-primary" wire:click="store">Store</button>
             </div>
         </div>
     </div>

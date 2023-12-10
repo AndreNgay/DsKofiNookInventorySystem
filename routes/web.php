@@ -33,10 +33,10 @@ Route::get('/home', App\Livewire\Home\Page::class)
     ->middleware('auth')
     ->name('home');
 
-// About to Expire Items
-Route::get('/about-to-expire-items', App\Livewire\AboutToExpireItems\Page::class)
+// Batches about to expire
+Route::get('/batches-about-to-expire', App\Livewire\BatchesAboutToExpire\Page::class)
     ->middleware('auth')
-    ->name('about-to-expire-items');
+    ->name('batches-about-to-expire');
 
 // Need Restocking Items
 Route::get('/need-restocking-items', App\Livewire\NeedRestockingItems\Page::class)
@@ -53,10 +53,6 @@ Route::get('/batches-inventory-item/{id}', App\Livewire\InventoryItemBatches\Pag
     ->middleware('auth')
     ->name('batches-inventory-item');
 
-Route::get('/inventory-item-batch-create/{id}', App\Livewire\InventoryItemBatches\Create::class)
-    ->middleware('auth')
-    ->name('inventory-item-batch-create');
-
 // Inventory Item Histories
 Route::get('/histories-inventory-item', App\Livewire\InventoryItemHistories\Page::class)
     ->middleware('auth')
@@ -67,11 +63,15 @@ Route::get('/orders', App\Livewire\Orders\Page::class)
     ->middleware('auth')
     ->name('orders');
 
+// Order Details Create
+Route::get('/order-details-create', App\Livewire\OrderDetailsCreate\Page::class)
+    ->middleware('auth')
+    ->name('order-details-create');
 
 // Order Details
-Route::get('/order-details', App\Livewire\OrderDetails\Page::class)
+Route::get('details-order/{id}', App\Livewire\OrderDetails\Page::class)
     ->middleware('auth')
-    ->name('order-details');
+    ->name('details-order');
 
 // Menu Items
 Route::get('/menu-items', App\Livewire\MenuItems\Page::class)
@@ -104,22 +104,7 @@ Route::get('/feedback', App\Livewire\Feedback\Page::class)
     ->middleware('auth')
     ->name('feedback');
 
-
-
-
-    
-Route::get('menu', [MenuController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('inventory');
-
-Route::get('order', [OrderController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('order');
-
-Route::get('/reports', [ReportController::class, 'index'])
-    ->middleware(['auth'])
+// Reports
+Route::get('/reports', App\Livewire\Reports\Page::class)
+    ->middleware('auth')
     ->name('reports');
-
-Route::get('/item-history', [InventoryItemHistoryController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('item-history');

@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\InventoryItem;
 use App\Models\Category;
 use App\Models\Unit;
+use Illuminate\Database\QueryException;
 
 
 class Page extends Component
@@ -43,6 +44,14 @@ class Page extends Component
     }
 
     public function store() {
+        $this->validate([
+            'item_name' => 'required',
+            'stock_reminder' => 'required',
+            'expiration_reminder' => 'required',
+            'category_id' => 'required',
+            'unit_id' => 'required',
+        ]);
+
         InventoryItem::create([
             'item_name' => $this->item_name,
             'stock_reminder' => $this->stock_reminder,
@@ -51,10 +60,14 @@ class Page extends Component
             'unit_id' => $this->unit_id,
         ]);
         $this->resetInputs();
+
+        session()->flash('message', 'Inventory Item Created Successfully!');
     }
 
     public function edit($id) {
-        $this->category_id = 1;
+        $this->inventory_item = InventoryItem::find($id);
+        
+        $this->category_id = $this->inventory_item->category_id;
         $this->category_selections = Category::all();
         $this->unit_selections = Unit::where('category_id', $this->category_id)->get();
         $this->unit_id = $this->units->first()->id;
@@ -85,8 +98,18 @@ class Page extends Component
     }
     
     public function destroy() {
-        $this->inventory_item->delete();
-        session()->flash('message', 'Inventory Item Deleted Successfully!');
+        try {
+            $this->inventory_item->delete();
+            session()->flash('message', 'Inventory Item Deleted Successfully!');
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1451) {
+                session()->flash('error', 'Cannot delete this inventory item. It is being referenced by other records.');
+            } else {
+                session()->flash('error', 'An error occurred while trying to delete the inventory item.');
+            }
+        }
+        return redirect()->route('inventory-items');
     }
+
     
 }

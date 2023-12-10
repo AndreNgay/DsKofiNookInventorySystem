@@ -18,6 +18,7 @@ class Order extends Model
     protected $fillable = [
         'total_price',
         'taken_by',
+        'completed',
     ];
     
     use HasFactory;

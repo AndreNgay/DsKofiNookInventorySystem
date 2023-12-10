@@ -18,8 +18,11 @@ class OrderDetail extends Model
     // $table->foreign('menu_item_id')->references('id')->on('menu_items');
 
     protected $fillable = [
-        'order_number',
         'menu_item_id',
+        'order_id',
+        'quantity',
+        'price',
+        'removed',
     ];
     
     use HasFactory;

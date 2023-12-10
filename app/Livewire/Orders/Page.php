@@ -5,19 +5,22 @@ namespace App\Livewire\Orders;
 use Livewire\Component;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\MenuItem;
 
 
 
 class Page extends Component
 {
-    public $orders;
-    public $users;
+    public $orders=[], $order_details=[], $users, $menu_items;
     public function mount() {
-        $this->orders = Order::all();
-        $this->users = User::all();
+
     }
     public function render()
     {
+        $this->orders = Order::where('completed', true)->get();
+        $this->users = User::all();
+
+        $this->menu_items = MenuItem::all();
         return view('livewire.orders.page');
     }
 }

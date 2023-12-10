@@ -43,7 +43,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Category</label>
-                    <select class="form-select" wire:model="category_id" wire:change="categoryChanged">
+                    <select class="form-select" wire:model="category_id" wire:change="categoryChanged" disabled>
                         @foreach ($category_selections as $category_selection)
                         @if ($category_selection->id == $category_id)
                         <option selected value="{{ $category_selection->id }}">{{ $category_selection->category_name }}</option>
@@ -56,7 +56,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Unit</label>
-                    <select class="form-select" wire:model="unit_id">
+                    <select class="form-select" wire:model="unit_id" disabled>
                         @foreach ($unit_selections as $unit_selection)
                         @if ($unit_selection->id == $unit_id)
                         <option selected value="{{ $unit_selection->id }}">{{ $unit_selection->unit_name }}</option>

@@ -39,10 +39,10 @@ class Page extends Component
     }
 
     public function resetInputs() {
-        $this->inventory_item_id = null;
-        $this->category_id = null;
-        $this->unit_id = null;
-        $this->amount = null;
+        $this->inventory_item_id = '';
+        $this->category_id = '';
+        $this->unit_id = '';
+        $this->amount = '';
     }
 
     public function create() {

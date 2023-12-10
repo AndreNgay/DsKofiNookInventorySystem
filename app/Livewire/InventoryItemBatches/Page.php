@@ -91,11 +91,28 @@ class Page extends Component
             'unit_id' => 'required',
             'expiration_date' => 'required',
         ]);
+        $prev_inventory_item_batch = InventoryItemBatch::find($this->inventory_item_batch_id);
+        $inventory_item = InventoryItem::find($this->inventory_item_id);
 
+        $prev_inventory_item_batch_unit = Unit::where('id', $prev_inventory_item_batch->unit_id)->first();
+        $inventory_item_unit = Unit::where('id', $inventory_item->unit_id)->first();
+        $new_inventory_item_unit = Unit::where('id', $this->unit_id)->first();
         $inventory_item_batch = InventoryItemBatch::find($this->inventory_item_batch_id);
+        $inventory_item_batch->update([
+            'stock' => $this->stock,
+            'unit_id' => $this->unit_id,
+            'expiration_date' => $this->expiration_date,
+        ]);
+        $prev_inventory_item_batch_stock = $prev_inventory_item_batch->stock * $prev_inventory_item_batch_unit->unit_conversion;
+        $inventory_item_total_stock = $inventory_item->total_stock * $inventory_item_unit->unit_conversion;
+        $total_stock = $inventory_item_total_stock - $prev_inventory_item_batch_stock + $this->stock * $new_inventory_item_unit->unit_conversion;
+
+        $inventory_item->update([
+            'total_stock' => $total_stock / $inventory_item_unit->unit_conversion,
+        ]);
         
-        $inventory_item_unit_conversion = Unit::where('id', $this->inventory_item->unit_id)->first()->unit_conversion; 
-        $inventory_item_batch_unit_conversion = Unit::where('id', $inventory_item_batch->unit_id)->first()->unit_conversion;
+
+        session()->flash('message', 'Inventory Item Batch Updated Successfully!');
     }
 
     public function delete($id){

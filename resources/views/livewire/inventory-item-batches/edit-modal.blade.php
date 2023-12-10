@@ -16,8 +16,16 @@
                 </div>
 
                 <div class="mb-3">
+                    <label class="form-label">Expiration Date</label>
+                    <input type="date" class="form-control" wire:model="expiration_date">
+                    @error('expiration_date')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label">Unit</label>
-                    <select class="form-select" wire:model="unit_id">
+                    <select class="form-select" wire:model="unit_id" disabled>
                         @foreach($unit_selections as $unit_selection)
                         @if($unit_selection->id == $unit_id)
                         <option selected value="{{ $unit_selection->id }}">{{ $unit_selection->unit_name }}</option>
@@ -31,19 +39,11 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Expiration Date</label>
-                    <input type="date" class="form-control" wire:model="expiration_date">
-                    @error('expiration_date')
-                    <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                </div>
-
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" wire:click="update">Store</button>
+                <button type="button" class="btn btn-primary" wire:click="update">Update</button>
             </div>
         </div>
     </div>

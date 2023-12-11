@@ -41,6 +41,11 @@ class Page extends Component
     }
 
     public function store() {
+        $this->validate([
+            'menu_item_id' => 'required',
+            'quantity' => 'required|numeric|min:1',
+        ]);
+
         $menu_item = MenuItem::find($this->menu_item_id);
         $this->price = $menu_item->price * $this->quantity;
         OrderDetail::create([

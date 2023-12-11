@@ -23,6 +23,7 @@
                 <div class="form-group mb-3">
                     <label for="role" class="form-label">Role</label>
                     <select class="form-control" wire:model="role">
+                        <option value="">Select Role</option>
                         <option value="employee">Employee</option>
                         <option value="owner">Owner</option>
                         <option value="admin">Admin</option>

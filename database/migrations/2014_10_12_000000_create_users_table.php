@@ -27,6 +27,10 @@ return new class extends Migration
             $table->string('emergency_contact_relation')->nullable();
             $table->string('emergency_contact_number')->nullable();
             $table->boolean('archived')->default(false);
+            $table->boolean('profile_made')->default(false);
+
+            //remember token
+            $table->string('remember_token')->nullable();
             
             $table->timestamps();
         });

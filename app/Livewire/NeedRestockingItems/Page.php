@@ -3,10 +3,17 @@
 namespace App\Livewire\NeedRestockingItems;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class Page extends Component
 {
     public $need_restocking_items=[], $inventory_items;
+
+    public function mount() {
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to(route('accounts'));
+        }
+    }
     public function render()
     {
         $this->inventory_items = \App\Models\InventoryItem::all();

@@ -17,7 +17,9 @@
 <body>
 
     <div>
-        @if(Auth::check())
+        @if(Auth::check() && Auth::user()->profile_made == false)
+        {{ $slot }}
+        @elseif(Auth::check())
         <div id="sidebar">
             <div class="d-flex justify-content-center">
                 <h2>Kofi-Nook</h2>
@@ -25,6 +27,7 @@
 
             <br />
             <br />
+            @if(Auth::user()->role == 'owner' || Auth::user()->role == 'employee')
             <!-- Home -->
             <div class="row">
                 <div class="col-md-1 link-item">
@@ -77,7 +80,9 @@
                     <a href="/units"  class="link-text"> Units</a>
                 </div>
             </div>
+            @endif
 
+            @if(Auth::user()->role == 'admin' || Auth::user()->role == 'owner')
             <!-- Accounts -->
             <div class="row">
                 <div class="col-md-1 link-item">
@@ -87,6 +92,7 @@
                     <a href="/accounts"  class="link-text"> Accounts</a>
                 </div>
             </div>
+            @endif
 
             <div class="row">
                 <div class="col-md-1 link-item">
@@ -105,13 +111,13 @@
 
                     <ul class="dropdown-menu">
                         <!-- Badge for notifications dropdown item -->
-                        <li><button class="dropdown-item" type="button">Notifications <span class="badge bg-danger">3</span></button></li>
-                        <li><button class="dropdown-item" type="button">Profile</button></li>
+                        <li><a class="dropdown-item" type="button">Notifications <span class="badge bg-danger">3</span></a></li>
+                        <li><a href='edit-profile' class="dropdown-item" type="button">Profile</a></li>
                         <li>
-                            <button class="dropdown-item" type="button" href="{{ route('logout') }}"
+                            <a class="dropdown-item" type="button" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
-                            </button>
+</a>
                         </li>
                     </ul>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

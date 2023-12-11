@@ -7,6 +7,7 @@ use App\Models\InventoryItem;
 use App\Models\Category;
 use App\Models\Unit;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 
 class Page extends Component
@@ -33,6 +34,12 @@ class Page extends Component
     public function categoryChanged() {
         $this->unit_selections = Unit::where('category_id', $this->category_id)->get();
         $this->unit_id = $this->unit_selections->first()->id;
+    }
+
+    public function mount() {
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to(route('accounts'));
+        }
     }
 
     public function resetInputs() {

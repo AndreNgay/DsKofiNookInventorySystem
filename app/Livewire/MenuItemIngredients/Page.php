@@ -9,6 +9,7 @@ use App\Models\MenuItem;
 use App\Models\MenuItemIngredient;
 use Livewire\Component;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 class Page extends Component
@@ -19,6 +20,9 @@ class Page extends Component
     public $menu_item_ingredient_id, $inventory_item_id, $category_id, $unit_id, $amount;
 
     public function mount() {
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to(route('accounts'));
+        }
         $this->menu_item_id = Route::current()->parameter('id');
         $this->menu_item = MenuItem::find($this->menu_item_id);
         $this->inventory_items = InventoryItem::all();

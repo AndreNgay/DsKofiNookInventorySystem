@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\OrderDetail;
 use App\Models\MenuItem;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class Page extends Component
 {
@@ -14,6 +15,9 @@ class Page extends Component
     public $total_price = 0;
 
     public function mount() {
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to(route('accounts'));
+        }
         $this->order = Order::create([ 
         ]);
         $this->order_id = $this->order->id;

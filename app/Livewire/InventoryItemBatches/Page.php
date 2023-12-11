@@ -8,6 +8,7 @@ use App\Models\Unit;
 use App\Models\InventoryItemBatch;
 use App\Models\InventoryItem;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 class Page extends Component
@@ -18,6 +19,9 @@ class Page extends Component
     public $inventory_item_batch_id, $stock, $expiration_date, $category_id, $unit_id, $unit_selections=[];
 
     public function mount() {
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to(route('accounts'));
+        }
         $this->inventory_item_id = Route::current()->parameter('id');
         $this->inventory_item = InventoryItem::find($this->inventory_item_id);
     }

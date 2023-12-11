@@ -5,6 +5,7 @@ namespace App\Livewire\MenuItems;
 use Livewire\Component;
 use App\Models\MenuItem;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -12,6 +13,12 @@ class Page extends Component
 {
     public $menu_items;
     public $menu_item, $id, $item_name, $price;
+
+    public function mount() {
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to(route('accounts'));
+        }
+    }
 
     public function render()
     {

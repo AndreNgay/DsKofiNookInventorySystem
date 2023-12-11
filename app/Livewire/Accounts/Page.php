@@ -6,11 +6,12 @@ use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class Page extends Component
 {   
     public $users;
-    public $account_id, $amount, $password, $archived_users=[];
+    public $account_id, $amount, $password, $role, $archived_users=[];
     
     public function render()
     {
@@ -51,6 +52,10 @@ class Page extends Component
             return session()->flash('error', 'Incorrect password');
         }
         else {
+            if(Auth::user()->role == 'owner') {
+                $this->role = 'employee';
+            
+            }
             for ($i = 0; $i < $this->amount; $i++) {
                 $maxUserId = $this->users->max('id');
                 $username = 'kofi-nook' . ($maxUserId + 1 + $i);
@@ -59,6 +64,7 @@ class Page extends Component
                 User::create([
                     'username' => $username,
                     'password' => Hash::make($password),
+                    'role' => $this->role,
                 ]);
             }
         }

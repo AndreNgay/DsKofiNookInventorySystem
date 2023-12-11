@@ -5,13 +5,26 @@ namespace App\Livewire\Home;
 use App\Models\InventoryItem;
 use App\Models\InventoryItemBatch;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+
 
 class Page extends Component
 {
     public $inventory_item_batches, $inventory_items, $num_of_batches_about_to_expire=0, $num_of_items_that_need_restocking=0;
 
+    public function mount() {
+        if(Auth::user()->profile_made == false) {
+            return redirect()->route('edit-profile');
+        }
+        
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to(route('accounts'));
+        }
+    }
+
     public function render()
     {
+ 
         $this->inventory_item_batches = InventoryItemBatch::all();
         $this->inventory_items = InventoryItem::all();
         foreach ($this->inventory_item_batches as $inventory_item_batch) {

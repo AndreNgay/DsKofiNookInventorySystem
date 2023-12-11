@@ -33,6 +33,11 @@ Route::get('/home', App\Livewire\Home\Page::class)
     ->middleware('auth')
     ->name('home');
 
+// Edit Profie
+Route::get('/edit-profile', App\Livewire\EditProfile\Page::class)
+    ->middleware('auth')
+    ->name('edit-profile');
+
 // Batches about to expire
 Route::get('/batches-about-to-expire', App\Livewire\BatchesAboutToExpire\Page::class)
     ->middleware('auth')

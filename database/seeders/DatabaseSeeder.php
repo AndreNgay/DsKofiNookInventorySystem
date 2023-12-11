@@ -17,33 +17,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'username' => 'e',
-            'password' => Hash::make('eeeeeeee'),
-            'role' => 'employee',
-    
-            'name' => 'employee',
-            'address' => '',
-    
-            'email' => 'e@e',
-            'contact_number' => '',
-            'emergency_contact_name' => '',
-            'emergency_contact_relation' => '',
-            'emergency_contact_number' => '',
-        ]);
+            'username' => 'a',
+            'password' => Hash::make('aaaaaaaa'),
+            'role' => 'admin',
 
-        User::create([
-            'username' => 'o',
-            'password' => Hash::make('oooooooo'),
-            'role' => 'owner',
-    
-            'name' => 'owner',
+            'name' => 'admin',
             'address' => '',
-    
-            'email' => 'o@o',
+
+            'email' => 'a@a',   
             'contact_number' => '',
             'emergency_contact_name' => '',
             'emergency_contact_relation' => '',
             'emergency_contact_number' => '',
+            'profile_made' => true,
         ]);
 
         Category::create([

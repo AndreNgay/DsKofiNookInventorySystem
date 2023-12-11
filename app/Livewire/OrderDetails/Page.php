@@ -7,12 +7,16 @@ use App\Models\OrderDetail;
 use Livewire\Component;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class Page extends Component
 {
     public $order_details, $order_id, $order, $menu_items, $total_price;
 
     public function mount() {
+        if (Auth::user()->role == 'admin') {
+            return redirect()->to(route('accounts'));
+        }
         $this->order_id = Route::current()->parameter('id');
         $this->order = Order::findOrFail($this->order_id);
         $this->menu_items = MenuItem::all();

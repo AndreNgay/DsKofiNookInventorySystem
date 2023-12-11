@@ -16,7 +16,7 @@ return new class extends Migration
             
             $table->string('username');
             $table->string('password');
-            $table->string('role');
+            $table->string('role')->default('employee');
 
             $table->string('name')->nullable();
             $table->string('address')->nullable();
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('emergency_contact_name')->nullable();
             $table->string('emergency_contact_relation')->nullable();
             $table->string('emergency_contact_number')->nullable();
+            $table->boolean('archived')->default(false);
             
             $table->timestamps();
         });

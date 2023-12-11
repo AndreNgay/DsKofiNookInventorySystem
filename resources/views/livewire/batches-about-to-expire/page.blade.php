@@ -18,7 +18,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Inventory Item</th>
+                        <th scope="col">Batch Number</th>
                         <th scope="col">Stock</th>
                         <th scope="col">Category</th>
                         <th scope="col">Expiration Date</th>
@@ -29,7 +30,16 @@
                 <tbody class="table-group-divider">
                     @foreach ($about_to_expire_batches as $about_to_expire_batch)
                     <tr>
-                        <th scope="row">{{ $about_to_expire_batch->id }}</th>
+                        <td>
+                            @foreach($inventory_items as $inventory_item)
+                            @if($inventory_item->id == $about_to_expire_batch->inventory_item_id)
+                            {{ $inventory_item->item_name }}
+                            @endif
+                            @endforeach
+                        </td>
+                        <td>
+                            Batch {{ $about_to_expire_batch->id }}
+                        </td>
                         <td>
                             {{ $about_to_expire_batch->stock }}
                             @foreach ($units as $unit)
@@ -86,10 +96,3 @@
 
 </div>
 
-@push('scripts')
-    <script>
-        Livewire.on('printReport', () => {
-            window.print();
-        });
-    </script>
-@endpush

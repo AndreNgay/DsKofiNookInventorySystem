@@ -3,6 +3,7 @@
 namespace App\Livewire\Units;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Unit;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Page extends Component
 {
-    public $units, $categories;
+    use WithPagination;
+
     public $dry_ingredients_default_unit, $liquids_default_unit, $counts_default_unit;
 
 
@@ -22,12 +24,15 @@ class Page extends Component
     
     public function render()
     {
-        $this->units = Unit::all();
-        $this->categories = Category::all();
+        $units = Unit::simplePaginate(10);
+        $categories = Category::all();
         $this->liquids_default_unit = Unit::where('category_id', 1)->where('default_unit', true)->first();
         $this->dry_ingredients_default_unit = Unit::where('category_id', 2)->where('default_unit', true)->first();
         $this->counts_default_unit = Unit::where('category_id', 3)->where('default_unit', true)->first();
-        return view('livewire.units.page');
+        return view('livewire.units.page', [
+            'units' => $units,
+            'categories' => $categories,
+        ]);
     }
 
     public function categoryChanged() {

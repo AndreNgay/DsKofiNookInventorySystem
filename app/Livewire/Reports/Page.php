@@ -4,18 +4,24 @@ namespace App\Livewire\Reports;
 
 use App\Models\Category;
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\InventoryItem;
 use App\Models\Unit;
 
 
 class Page extends Component
 {
-    public $inventory_items, $categories, $units;
+    use WithPagination;
+
     public function render()
     {
-        $this->inventory_items = InventoryItem::all();
-        $this->categories = Category::all();
-        $this->units = Unit::all();
-        return view('livewire.reports.page');
+        $inventory_items = InventoryItem::simplePaginate(10);
+        $categories = Category::all();
+        $units = Unit::all();
+        return view('livewire.reports.page', [
+            'inventory_items' => $inventory_items,
+            'categories' => $categories,
+            'units' => $units,
+        ]);
     }
 }

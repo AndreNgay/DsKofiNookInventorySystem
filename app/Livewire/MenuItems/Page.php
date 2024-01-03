@@ -3,6 +3,7 @@
 namespace App\Livewire\MenuItems;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\MenuItem;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Page extends Component
 {
-    public $menu_items;
+    use WithPagination;
+    
     public $menu_item, $id, $item_name, $price;
 
     public function mount() {
@@ -20,8 +22,10 @@ class Page extends Component
 
     public function render()
     {
-        $this->menu_items = MenuItem::all();
-        return view('livewire.menu-items.page');
+        $menu_items = MenuItem::simplePaginate(10);
+        return view('livewire.menu-items.page', [
+            'menu_items' => $menu_items,
+        ]);
     }
 
     public function resetInputs() {

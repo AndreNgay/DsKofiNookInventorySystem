@@ -8,14 +8,17 @@ use App\Models\InventoryItem;
 use App\Models\MenuItem;
 use App\Models\MenuItemIngredient;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
 class Page extends Component
 {
+    use WithPagination;
+
     public $menu_item_id, $menu_item;
-    public $menu_item_ingredients, $inventory_items, $categories, $units=[], $unit_selections=[];
+    public $inventory_items, $categories, $units=[], $unit_selections=[];
     
     public $menu_item_ingredient_id, $inventory_item_id, $category_id, $unit_id, $amount;
 
@@ -32,8 +35,10 @@ class Page extends Component
 
     public function render()
     {
-        $this->menu_item_ingredients = MenuItemIngredient::where('menu_item_id', $this->menu_item_id)->get();
-        return view('livewire.menu-item-ingredients.page');
+        $menu_item_ingredients = MenuItemIngredient::where('menu_item_id', $this->menu_item_id)->simplePaginate(10);
+        return view('livewire.menu-item-ingredients.page', [
+            'menu_item_ingredients' => $menu_item_ingredients,
+        ]);
     }
 
     public function inventoryItemChanged(){

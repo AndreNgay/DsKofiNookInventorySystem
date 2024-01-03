@@ -58,7 +58,8 @@
             </table>
         </div>
         <hr />
-        
-
     </div>
+
+    {{ $order_details->links() }}
+
 </div>

@@ -67,5 +67,8 @@
             </table>
         </div>
     </div>
+
+    {{ $inventory_items->links() }}
+
 </div>
 

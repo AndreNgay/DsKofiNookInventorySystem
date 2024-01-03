@@ -53,7 +53,7 @@ class Page extends Component
     public function store() {
         $this->validate([
             'stock' => 'required',
-            'expiration_date' => 'required',
+            'expiration_date' => '',
             'category_id' => 'required',
             'unit_id' => 'required',
         ]);

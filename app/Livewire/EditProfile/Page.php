@@ -3,51 +3,66 @@
 namespace App\Livewire\EditProfile;
 
 use Livewire\Component;
+use App\Models\User;
 
 class Page extends Component
 {
-    public $name, $address, $email, $contact_number, $emergency_contact_name, $emergency_contact_relation, $emergency_contact_number, $password;
+    public $name, $email, $password, $confirm_password, $currentUrl;
     public function mount() {
         $this->name = auth()->user()->name;
-        $this->address = auth()->user()->address;
         $this->email = auth()->user()->email;
-        $this->contact_number = auth()->user()->contact_number;
-        $this->emergency_contact_name = auth()->user()->emergency_contact_name;
-        $this->emergency_contact_relation = auth()->user()->emergency_contact_relation;
-        $this->emergency_contact_number = auth()->user()->emergency_contact_number;
-        $this->password = auth()->user()->password;
     }
     public function render()
     {
+        $this->currentUrl = url()->current();
         return view('livewire.edit-profile.page');
     }
 
-    public function updateProfile() {
+    public function store() {
         $this->validate([
-            'name' => 'required',
-            'address' => 'required',
+            'name' => 'required|string',
             'email' => 'required|email',
-            'contact_number' => 'required',
-            'emergency_contact_name' => 'required',
-            'emergency_contact_relation' => 'required',
-            'emergency_contact_number' => 'required',
+            'password' => 'required|string|min:8',
+            'confirm_password' => 'required|same:password',
         ]);
-
-        // check if default password
-        if($this->password == 'kofi-nook'){
-            session()->flash('error', 'Please enter a new password');
+        if($this->password == 'kofi-nook') {
+            // display message password must not be the default password
+            session()->flash('error', 'Password must not be the default password');
         }
-        $user = auth()->user();
-        $user->name = $this->name;
-        $user->address = $this->address;
-        $user->email = $this->email;
-        $user->contact_number = $this->contact_number;
-        $user->emergency_contact_name = $this->emergency_contact_name;
-        $user->emergency_contact_relation = $this->emergency_contact_relation;
-        $user->emergency_contact_number = $this->emergency_contact_number;
-        $user->password = $this->password;
-        $user->profile_made = true;
-        $user->save();
-        return redirect()->route('home');
+        else {
+            $user = User::find(auth()->user()->id);
+            $user->update([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => bcrypt($this->password),
+            ]);
+    
+            return redirect()->route('edit-profile-personal-info');
+        }
+        
+    }
+
+    public function profile_made_store() {
+        $this->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'password' => '',
+            'confirm_password' => 'same:password',
+        ]);
+        if($this->password == 'kofi-nook') {
+            // display message password must not be the default password
+            session()->flash('error', 'Password must not be the default password');
+        }
+        else {
+            $user = User::find(auth()->user()->id);
+            $user->update([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => bcrypt($this->password),
+            ]);
+    
+            return redirect()->route('edit-profile-personal-info');
+        }
+        
     }
 }

@@ -19,7 +19,12 @@ return new class extends Migration
             $table->string('role')->default('employee');
 
             $table->string('name')->nullable();
-            $table->string('address')->nullable();
+            
+            $table->string('house_number')->nullable();
+            $table->string('street')->nullable();
+            $table->string('barangay')->nullable();
+            $table->string('city')->nullable();
+            $table->string('province')->nullable();
 
             $table->string('email')->unique()->nullable();
             $table->string('contact_number')->nullable();

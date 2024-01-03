@@ -9,7 +9,7 @@
         <div class="col-md-2">
             <button wire:click="create" type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
                 data-bs-target="#createInventoryItemBatch">
-                Add New Ingredient
+                Create New Batch
             </button>
         </div>
     </div>

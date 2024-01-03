@@ -36,11 +36,7 @@ class Page extends Component
         $this->unit_id = $this->unit_selections->first()->id;
     }
 
-    public function mount() {
-        if (Auth::user()->role == 'admin') {
-            return redirect()->to(route('accounts'));
-        }
-    }
+
 
     public function resetInputs() {
         $this->item_name = '';
@@ -54,7 +50,7 @@ class Page extends Component
         $this->validate([
             'item_name' => 'required',
             'stock_reminder' => 'required',
-            'expiration_reminder' => 'required',
+            'expiration_reminder' => '',
             'category_id' => 'required',
             'unit_id' => 'required',
         ]);

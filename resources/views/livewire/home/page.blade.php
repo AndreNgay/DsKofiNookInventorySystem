@@ -26,8 +26,6 @@
                 </div>
                 <div class="card-body">
                     <h2 class="card-title">{{ $num_of_items_that_need_restocking++ }}</h2>
-
-
                 </div>
                 <div class="card-footer">
                     <a href="/need-restocking-items" class="btn btn-primary">More Details <i
@@ -37,6 +35,22 @@
         </div>
     </div>
 
+    <div class="row mb-1">
+        <div class="col-md-1">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Popular Items
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="updateChartData('today')">Today</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateChartData('this_month')">This Month</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateChartData('this_year')">This Year</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -45,93 +59,53 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-    <script>
-        // Dummy data for earnings breakdown
-        var data = {
-            labels: ['Macchiato', 'Americano', 'Mocha', 'Long Black'],
-            datasets: [{
-                label: 'Earnings Breakdown',
-                data: [2000, 3500, 1500, 4000],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
-                    'rgba(75, 192, 192, 0.7)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                ],
-                borderWidth: 1,
-            }],
-        };
-
-        var options = {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
-
-        // Create the bar chart
-        var ctx = document.getElementById('earningsChart').getContext('2d');
-        var myBarChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options
-        });
-    </script>
 
     <script>
-        // Dummy data for inventory trends
-        var data = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-            datasets: [{
-                label: 'Coffee Beans',
-                data: [300, 320, 340, 310, 330, 350],
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 2,
-                fill: false,
-            }, {
-                label: 'Milk',
-                data: [200, 210, 230, 220, 240, 200],
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 2,
-                fill: false,
-            }, {
-                label: 'Sugar',
-                data: [150, 140, 160, 180, 170, 190],
-                borderColor: 'rgba(255, 206, 86, 1)',
-                borderWidth: 2,
-                fill: false,
-            }],
-        };
+        // Fetch data from the Laravel backend
+        fetch('/api/earnings')
+            .then(response => response.json())
+            .then(dataFromDatabase => {
+                // Use the fetched data to update the chart
+                updateChart(dataFromDatabase);
+            })
+            .catch(error => console.error('Error fetching data:', error));
 
-        var options = {
-            scales: {
-                x: {
-                    beginAtZero: true,
-                },
-                y: {
-                    beginAtZero: true,
+        function updateChart(dataFromDatabase) {
+            var data = {
+                labels: dataFromDatabase.map(entry => entry.item_name),
+                datasets: [{
+                    label: 'Earnings Breakdown',
+                    data: dataFromDatabase.map(entry => entry.amount_of_times_bought),
+                    backgroundColor: [
+                        'burlywood',
+                        'burlywood',
+                        'burlywood',
+                        // Add more colors as needed
+                    ],
+                    borderColor: [
+                        'saddlebrown', // Border color can be different
+                    ],
+                    borderWidth: 1,
+                }],
+            };
+
+            var options = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
-            }
-        };
+            };
 
-        // Create the line chart
-        var ctx = document.getElementById('inventoryTrendsChart').getContext('2d');
-        var myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: options
-        });
+            // Create the bar chart
+            var ctx = document.getElementById('earningsChart').getContext('2d');
+            var myBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: options
+            });
+        }
     </script>
-
 
 </div>

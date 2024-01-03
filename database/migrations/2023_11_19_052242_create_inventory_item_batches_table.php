@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventory_item_batches', function (Blueprint $table) {
             $table->id();
-            $table->integer('stock');
+            $table->decimal('stock', 10, 2)->nullable()->default(0);
             $table->date('expiration_date');
             $table->unsignedBigInteger('inventory_item_id');
             $table->unsignedBigInteger('category_id');

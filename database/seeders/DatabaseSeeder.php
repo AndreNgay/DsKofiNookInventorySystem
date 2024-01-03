@@ -22,9 +22,40 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
 
             'name' => 'admin',
-            'address' => '',
 
             'email' => 'a@a',   
+            'contact_number' => '',
+            'emergency_contact_name' => '',
+            'emergency_contact_relation' => '',
+            'emergency_contact_number' => '',
+            'profile_made' => true,
+        ]);
+
+        User::create([
+            'username' => 'e',
+            'password' => Hash::make('eeeeeeee'),
+            'role' => 'employee',
+
+            'name' => 'employee',
+
+
+            'email' => 'e@e',   
+            'contact_number' => '',
+            'emergency_contact_name' => '',
+            'emergency_contact_relation' => '',
+            'emergency_contact_number' => '',
+            'profile_made' => true,
+        ]);
+
+        User::create([
+            'username' => 'o',
+            'password' => Hash::make('oooooooo'),
+            'role' => 'owner',
+
+            'name' => 'owner',
+
+
+            'email' => 'o@o',   
             'contact_number' => '',
             'emergency_contact_name' => '',
             'emergency_contact_relation' => '',

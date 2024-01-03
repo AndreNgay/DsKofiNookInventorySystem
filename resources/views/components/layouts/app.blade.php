@@ -27,14 +27,14 @@
 
             <br />
             <br />
-            @if(Auth::user()->role == 'owner' || Auth::user()->role == 'employee')
+            
             <!-- Home -->
             <div class="row">
                 <div class="col-md-1 link-item">
-                    <a href="/home" ><i class="fas fa-solid fa-house"></i></a>
+                    <a href="/home"><i class="fas fa-solid fa-house"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/home"  class="link-text"> Home</a>
+                    <a href="/home" class="link-text"> Home</a>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                     <a href="/inventory-items"><i class="fas fa-solid fa-box-open"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/inventory-items"  class="link-text"> Inventory</a>
+                    <a href="/inventory-items" class="link-text"> Inventory</a>
                 </div>
             </div>
 
@@ -54,10 +54,19 @@
                     <a href="/orders"><i class="fas fa-solid fa-cart-shopping"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/orders"  class="link-text"> Orders</a>
+                    <a href="/orders" class="link-text"> Orders</a>
                 </div>
             </div>
 
+            <!-- Reports -->
+            <div class="row">
+                <div class="col-md-1 link-item">
+                    <a href="/reports"><i class="fas fa-solid fa-chart-line"></i></a>
+                </div>
+                <div class="col-md-1 link-item">
+                    <a href="/reports" class="link-text"> Reports</a>
+                </div>
+            </div>
 
             <hr />
 
@@ -67,7 +76,7 @@
                     <a href="/menu-items"><i class="fas fa-solid fa-mug-saucer"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/menu-items"  class="link-text"> Menu</a>
+                    <a href="/menu-items" class="link-text"> Menu</a>
                 </div>
             </div>
 
@@ -77,10 +86,10 @@
                     <a href="/units"><i class="fa-solid fa-scale-unbalanced-flip"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/units"  class="link-text"> Units</a>
+                    <a href="/units" class="link-text"> Units</a>
                 </div>
             </div>
-            @endif
+  
 
             @if(Auth::user()->role == 'admin' || Auth::user()->role == 'owner')
             <!-- Accounts -->
@@ -89,7 +98,7 @@
                     <a href="/accounts"><i class="fas fa-solid fa-user-tie"></i></a>
                 </div>
                 <div class="col-md-1 link-item">
-                    <a href="/accounts"  class="link-text"> Accounts</a>
+                    <a href="/accounts" class="link-text"> Accounts</a>
                 </div>
             </div>
             @endif
@@ -105,25 +114,26 @@
                 <div class="col-md-1 link-item">
                     <a id="logout" class="link-text" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }} <i class="fas fa-caret-down"></i>
-                        <!-- Badge for user notifications -->
-                        <span class="badge bg-danger">3</span>
+                 
+                
                     </a>
 
                     <ul class="dropdown-menu">
                         <!-- Badge for notifications dropdown item -->
-                        <li><a class="dropdown-item" type="button">Notifications <span class="badge bg-danger">3</span></a></li>
+                        <!-- <li><a class="dropdown-item" type="button">Notifications <span
+                                    class="badge bg-danger">3</span></a></li> -->
                         <li><a href='edit-profile' class="dropdown-item" type="button">Profile</a></li>
                         <li>
                             <a class="dropdown-item" type="button" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
-</a>
+                            </a>
                         </li>
                     </ul>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
-                    
+
                 </div>
             </div>
 

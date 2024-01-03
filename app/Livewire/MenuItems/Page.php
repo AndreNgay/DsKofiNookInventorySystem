@@ -15,9 +15,7 @@ class Page extends Component
     public $menu_item, $id, $item_name, $price;
 
     public function mount() {
-        if (Auth::user()->role == 'admin') {
-            return redirect()->to(route('accounts'));
-        }
+ 
     }
 
     public function render()

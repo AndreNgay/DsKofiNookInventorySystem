@@ -17,9 +17,6 @@ class Page extends Component
             return redirect()->route('edit-profile');
         }
         
-        if (Auth::user()->role == 'admin') {
-            return redirect()->to(route('accounts'));
-        }
     }
 
     public function render()
@@ -34,13 +31,13 @@ class Page extends Component
                 $expirationReminderDays = $inventory_item->expiration_reminder;
                 $expirationDate = now()->addDays($expirationReminderDays);
 
-                if ($inventory_item_batch->expiration_date < $expirationDate) {
+                if ($inventory_item_batch->expiration_date <= $expirationDate) {
                     $this->num_of_batches_about_to_expire++;
                 }
             }
         }
         foreach ($this->inventory_items as $inventory_item) {
-            if($inventory_item->total_stock < $inventory_item->stock_reminder) {
+            if($inventory_item->total_stock <= $inventory_item->stock_reminder) {
                 $this->num_of_items_that_need_restocking++;
             }
         }

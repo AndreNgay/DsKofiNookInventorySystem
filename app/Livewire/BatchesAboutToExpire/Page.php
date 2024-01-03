@@ -7,7 +7,8 @@ use Livewire\Component;
 use App\Models\InventoryItem;
 use App\Models\Unit;
 
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 use DateTime;
 class Page extends Component
 {
@@ -36,11 +37,16 @@ class Page extends Component
 
     public function printReport()
     {
-        $data = $this->batches_about_to_expire;
+        $data = $this->about_to_expire_batches;
+        $about_to_expire_batches = $this->about_to_expire_batches;
+        $inventory_items = $this->inventory_items;
+        $units = $this->units;
+        $categories = $this->categories;    
+        $current_date = $this->current_date;
 
-        $pdf = PDF::loadView('reports.report_view', compact('data'));
+        $pdf = Pdf::loadView('livewire.batches-about-to-expire.page', compact('about_to_expire_batches', 'inventory_items', 'units', 'categories', 'current_date'))->setPaper('a4', 'landscape')->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isPhpEnabled' => true, 'encoding' => 'UTF-8']);
+
         return $pdf->download('report.pdf');
-
-
     }
+
 }

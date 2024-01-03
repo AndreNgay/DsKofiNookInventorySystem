@@ -17,9 +17,7 @@ class Page extends Component
     public $unit, $id, $unit_name, $category_id, $unit_conversion;
 
     public function mount() {
-        if (Auth::user()->role == 'admin') {
-            return redirect()->to(route('accounts'));
-        }
+
     }
     
     public function render()

@@ -23,7 +23,12 @@ class User extends Authenticatable
         'role',
 
         'name',
-        'address',
+        
+        'house_number',
+        'street',
+        'barangay',
+        'city',
+        'province',
 
         'email',
         'contact_number',

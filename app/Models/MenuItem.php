@@ -14,7 +14,8 @@ class MenuItem extends Model
     // $table->timestamps();
     protected $fillable = [
         'item_name',
-        'price'
+        'price',
+        'amount_of_times_bought',
     ];
     use HasFactory;
 }

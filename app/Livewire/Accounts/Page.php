@@ -18,7 +18,7 @@ class Page extends Component
         $this->users=User::where('archived', false)->get();
         return view('livewire.accounts.page');
     }
-
+    
     public function setArchivedUsers() {
         $this->archived_users = User::where('archived', true)->get();
     }

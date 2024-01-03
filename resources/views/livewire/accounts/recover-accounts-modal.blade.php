@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="recoverAccountsModal">Generate Account(s)</h1>
+                <h1 class="modal-title fs-5" id="recoverAccountsModal">Recover Account(s)</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -31,6 +31,7 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                     @foreach ($archived_users as $user)
+                                    @if(Auth::user()->role == 'admin')
                                     <tr>
                                         <th scope="row">{{ $user->id }}</th>
                                         <td>{{ $user->username }}</td>
@@ -47,6 +48,26 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @elseif(Auth::user()->role == 'owner')
+                                    @if($user->role == 'employee')
+                                    <tr>
+                                        <th scope="row">{{ $user->id }}</th>
+                                        <td>{{ $user->username }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->role }}</td>
+                                        <td>{{ $user->email }}</td>
+
+                                        <td>
+                                            <div class="d-flex">
+                                                <button type="button" class="btn btn-primary ms-2"
+                                                    wire:click="recover({{ $user->id }})">
+                                                    <span class="bi bi-recycle"> Recover</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>

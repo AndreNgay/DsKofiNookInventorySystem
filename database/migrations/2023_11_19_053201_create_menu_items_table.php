@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('item_name');
             $table->string('price');
+            $table->integer('amount_of_times_bought')->nullable();
 
             $table->timestamps();
         });

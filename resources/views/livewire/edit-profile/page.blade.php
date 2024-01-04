@@ -120,7 +120,11 @@
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" name="email" class="form-control" wire:model="email">
+                                <small id="emailHelp" class="form-text text-muted">
+                        Changing your email will log you out and require you to verify your new email address.
+                    </small>
                                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+
                             </div>
 
                             <!-- Password -->

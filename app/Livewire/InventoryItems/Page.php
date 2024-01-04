@@ -3,41 +3,32 @@
 namespace App\Livewire\InventoryItems;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\InventoryItem;
 use App\Models\Category;
 use App\Models\Unit;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 
+
 class Page extends Component
 {
-    use WithPagination;
-
+    public $inventory_item, $inventory_items, $categories, $units;
 
     public $id, $item_name, $item_description, $stock_reminder, $expiration_reminder, $category_id, $unit_id;
-
     public $category_selections=[], $unit_selections=[];
-
     public function render()
     {
-        $inventory_items = InventoryItem::simplePaginate(10);
-
-        $categories = Category::all();
-        $units = Unit::all();
-
-        return view('livewire.inventory-items.page', [
-            'inventory_items' => $inventory_items,
-            'categories' => $categories,
-            'units' => $units,
-        ]);
+        $this->inventory_items = InventoryItem::all();
+        $this->categories = Category::all();
+        $this->units = Unit::all();
+        return view('livewire.inventory-items.page');
     }
 
     public function createInventoryItemClicked() {
         $this->category_id = 1;
         $this->category_selections = Category::all();
         $this->unit_selections = Unit::where('category_id', $this->category_id)->get();
-        $this->unit_id = Unit::first()->id;
+        $this->unit_id = $this->units->first()->id;
     }
 
     public function categoryChanged() {

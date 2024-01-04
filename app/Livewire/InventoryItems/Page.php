@@ -14,9 +14,9 @@ class Page extends Component
 {
     use WithPagination;
 
+
     public $inventory_item;
     public $id, $item_name, $item_description, $stock_reminder, $expiration_reminder, $category_id, $unit_id;
-    
 
     public $category_selections=[], $unit_selections=[];
 

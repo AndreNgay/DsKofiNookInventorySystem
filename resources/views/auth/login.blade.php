@@ -12,13 +12,20 @@
                 <div class="text-center">
                     <h2>Login</h2>
                 </div>
+                @if(session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+                @endif
+                @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
 
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <input id="username" type="text"
-                            class="form-control @error('username') is-invalid @enderror" name="username"
-                            value="{{ old('username') }}" required autocomplete="username" autofocus
+                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
+                            name="username" value="{{ old('username') }}" required autocomplete="username" autofocus
                             placeholder="Username">
                         @error('username')
                         <span class="invalid-feedback" role="alert">

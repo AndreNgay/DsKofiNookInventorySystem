@@ -50,6 +50,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
+
                         @foreach ($inventory_items as $inventory_item)
                         <tr>
                             <th scope="row">{{ $inventory_item->id }}</th>
@@ -77,6 +78,34 @@
                                         <span class="bi bi-eye-fill"> View Batches</span>
                                     </button>
 
+                    @foreach ($inventory_items as $inventory_item)
+                    <tr>
+                        <th scope="row">{{ $inventory_item->id }}</th>
+                        <td>{{ $inventory_item->item_name }}</td>
+                        <td>
+                            @foreach ($categories as $category)
+                            @if($category->id == $inventory_item->category_id)
+                            {{ $category->category_name }}
+                            @endif
+                            @endforeach
+                        </td>
+                        <td>
+                            {{ $inventory_item->total_stock }}
+                            @foreach ($units as $unit)
+                            @if($unit->id == $inventory_item->unit_id)
+                            {{ $unit->unit_name }}
+                            @endif
+                            @endforeach
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-primary ms-2" type="button"
+                                    href="{{ route('batches-inventory-item', ['id' => $inventory_item->id]) }}"
+                                    wire:navigate>
+                                    <span class="bi bi-eye-fill"> View Batches</span>
+                                </button>
+
+
                                     <button class="btn btn-primary ms-2" type="button" href="/histories-inventory-item" wire:navigate>
                                         <span class="bi bi-clock-fill"> View History</span>
                                     </button>
@@ -99,6 +128,5 @@
             </table>
         </div>
     </div>
-    
     {{ $inventory_items->links() }}
 </div>

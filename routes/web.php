@@ -1,17 +1,13 @@
 <?php
 
-use App\Http\Controllers\InventoryItemBatchController;
-use App\Http\Controllers\InventoryItemHistoryController;
-use App\Http\Controllers\MenuItemIngredientController;
-use App\Http\Controllers\OrderController;
-use App\Livewire\InventoryItemBatches\CreateInventoryItemBatch;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ChartController;
+
+use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\PdfGenerator;
 use App\Http\Controllers\PdfGeneratorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,14 +22,24 @@ use App\Http\Controllers\PdfGeneratorController;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('init');
 
 Route::get('/api/earnings', [ChartController::class, 'getEarningsData']);
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Home
+
+// Route::get('/verify/{token}', 'VerificationController@verify')->name('verification.verify');
+Route::get('/verify/{token}', [VerificationController::class, 'verify'])->name('verification.verify');
+
+
+
+// Inventory Item Batches
+Route::get('/batches-inventory-item/{id}', App\Livewire\InventoryItemBatches\Page::class)
+    ->middleware('auth', 'profile-made')
+    ->name('batches-inventory-item');
+
+
 Route::get('/home', App\Livewire\Home\Page::class)
     ->middleware('auth', 'profile-made')
     ->name('home');
@@ -42,11 +48,19 @@ Route::get('/home', App\Livewire\Home\Page::class)
 Route::get('/edit-profile', App\Livewire\EditProfile\Page::class)
     ->middleware('auth')
     ->name('edit-profile');
+Route::get('/edit-profile-password', App\Livewire\EditProfile\Password::class)
+    ->middleware('auth')
+    ->name('edit-profile-password');
+Route::get('/edit-profile-email', App\Livewire\EditProfile\Email::class)
+    ->middleware('auth')
+    ->name('edit-profile-email');
+
+// <a href="{{ route('edit-profile-personal-info', $user->verification_token) }}" class="btn btn-primary">Verify Email</a>
 Route::get('/edit-profile-personal-info', App\Livewire\EditProfile\PersonalInfo::class)
     ->middleware('auth')
     ->name('edit-profile-personal-info');
 Route::get('/edit-profile-contact', App\Livewire\EditProfile\Contact::class)
-    ->middleware('auth')
+    ->middleware('auth', 'email-verified')
     ->name('edit-profile-contact');
 
 
@@ -54,7 +68,7 @@ Route::get('/edit-profile-contact', App\Livewire\EditProfile\Contact::class)
 Route::get('/batches-about-to-expire', App\Livewire\BatchesAboutToExpire\Page::class)
     ->middleware('auth', 'profile-made')
     ->name('batches-about-to-expire');
-
+Route::get('/batches-about-to-expire-generate-pdf', [App\Livewire\BatchesAboutToExpire\Page::class, 'printReport']);
 // Need Restocking Items
 Route::get('/need-restocking-items', App\Livewire\NeedRestockingItems\Page::class)
     ->middleware('auth', 'profile-made')

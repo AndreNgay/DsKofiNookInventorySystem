@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class ProfileMade
+class EmailVerified
 {
     /**
      * Handle an incoming request.
@@ -15,9 +16,10 @@ class ProfileMade
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // check if profile is made
-        if (!auth()->user()->profile_made) {
-            return redirect()->route('edit-profile-password');
+        $user = Auth::user();
+        if($user->verified == null){
+            // redirect with error message
+            return redirect()->route('edit-profile-email')->with('error', 'Please verify your email address.');
         }
         return $next($request);
     }

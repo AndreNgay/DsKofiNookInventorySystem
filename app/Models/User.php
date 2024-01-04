@@ -37,7 +37,9 @@ class User extends Authenticatable
         'emergency_contact_number',
         'archived',
         'profile_made',
-        'remember_token'
+        'remember_token',
+        'verified',
+        'verification_token',
     ];
 
     /**

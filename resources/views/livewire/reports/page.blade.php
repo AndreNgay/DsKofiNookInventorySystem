@@ -122,7 +122,48 @@
         </div>
     </div>
 
-
+<!-- Table -->
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Select</th>
+                <th scope="col">#</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Stock Left</th>
+                <th scope="col">Restock Reminder</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach ($filteredInventoryItems as $inventory_item)
+            <tr wire:click.prevent="toggleSelected({{ $inventory_item->id }})" style="background-color: {{ in_array($inventory_item->id, $selectedItems) ? 'lightgreen' : 'white' }}">
+                <td>
+                    <input type="checkbox" wire:model="selectedItems" value="{{ $inventory_item->id }}" />
+                </td>
+        <th scope="row">{{ $inventory_item->id }}</th>
+        <td>{{ $inventory_item->item_name }}</td>
+        <td>
+            @foreach ($categories as $category)
+                @if($category->id == $inventory_item->category_id)
+                    {{ $category->category_name }}
+                @endif
+            @endforeach
+        </td>
+        <td>
+            {{ $inventory_item->total_stock }}
+            @foreach ($units as $unit)
+                @if($unit->id == $inventory_item->unit_id)
+                    {{ $unit->unit_name }}
+                @endif
+            @endforeach
+        </td>
+        <td>{{ $this->restockReminderStatus($inventory_item->total_stock, $inventory_item->stock_reminder) }}</td>
+        
+    </tr>
+@endforeach
+        </tbody>
+    </table>
 </div>
 
 </div>

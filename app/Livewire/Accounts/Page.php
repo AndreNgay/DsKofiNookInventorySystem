@@ -65,6 +65,7 @@ class Page extends Component
                     'username' => $username,
                     'password' => Hash::make($password),
                     'role' => $this->role,
+                    'verification_token' => Str::random(60),
                 ]);
             }
         }

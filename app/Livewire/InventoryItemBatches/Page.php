@@ -3,6 +3,7 @@
 namespace App\Livewire\InventoryItemBatches;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Category;
 use App\Models\Unit;
 use App\Models\InventoryItemBatch;
@@ -13,8 +14,9 @@ use Illuminate\Support\Facades\Auth;
 
 class Page extends Component
 {
+    use WithPagination;
+
     public $inventory_item_id, $inventory_item;
-    public $inventory_item_batches, $categories, $units, $current_date;
 
     public $inventory_item_batch_id, $stock, $expiration_date, $category_id, $unit_id, $unit_selections=[];
 
@@ -30,11 +32,16 @@ class Page extends Component
     public function render()
     {
 
-        $this->inventory_item_batches = InventoryItemBatch::where('inventory_item_id', $this->inventory_item_id)->get();
-        $this->categories = Category::all();
-        $this->units = Unit::all();
-        $this->current_date = now()->timezone('Asia/Manila');
-        return view('livewire.inventory-item-batches.page');
+        $inventory_item_batches = InventoryItemBatch::where('inventory_item_id', $this->inventory_item_id)->simplePaginate(10);
+        $categories = Category::all();
+        $units = Unit::all();
+        $current_date = now()->timezone('Asia/Manila');
+        return view('livewire.inventory-item-batches.page', [
+            'inventory_item_batches' => $inventory_item_batches,
+            'categories' => $categories,
+            'units' => $units,
+            'current_date' => $current_date,
+        ]);
     }
 
     public function resetInputs() {

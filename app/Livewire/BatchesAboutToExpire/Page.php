@@ -2,6 +2,7 @@
 
 namespace App\Livewire\BatchesAboutToExpire;
 
+use App\Models\Category;
 use App\Models\InventoryItemBatch;
 use Livewire\Component;
 use App\Models\InventoryItem;
@@ -18,7 +19,7 @@ class Page extends Component
         $this->inventory_items = InventoryItem::all();
         $this->current_date = now();
         $this->units = Unit::all();
-        $this->categories = \App\Models\Category::all();
+        $this->categories = Category::all();
         $this->inventory_item_batches = InventoryItemBatch::all();
         foreach ($this->inventory_item_batches as $inventory_item_batch) {
             $inventory_item = InventoryItem::find($inventory_item_batch->inventory_item_id);
@@ -38,14 +39,25 @@ class Page extends Component
     public function printReport()
     {
         $data = $this->about_to_expire_batches;
-        $about_to_expire_batches = $this->about_to_expire_batches;
-        $inventory_items = $this->inventory_items;
-        $units = $this->units;
-        $categories = $this->categories;    
-        $current_date = $this->current_date;
+        $about_to_expire_batches = [];
+        $inventory_items = InventoryItem::all();
+        $inventory_item_batches = InventoryItemBatch::all();
+        $units = Unit::all();
+        $categories = Category::all(); 
+        $current_date = now();
+        foreach($inventory_item_batches as $inventory_item_batch) {
+            $inventory_item = InventoryItem::find($inventory_item_batch->inventory_item_id);
+            if ($inventory_item) {
+                $expirationReminderDays = $inventory_item->expiration_reminder;
+                $expirationDate = now()->addDays($expirationReminderDays);
 
-        $pdf = Pdf::loadView('livewire.batches-about-to-expire.page', compact('about_to_expire_batches', 'inventory_items', 'units', 'categories', 'current_date'))->setPaper('a4', 'landscape')->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isPhpEnabled' => true, 'encoding' => 'UTF-8']);
+                if ($inventory_item_batch->expiration_date < $expirationDate) {
+                    array_push($about_to_expire_batches, $inventory_item_batch);
+                }
+            }
+        }
 
+        $pdf = Pdf::loadView('livewire.batches-about-to-expire.pdf', compact('about_to_expire_batches', 'inventory_items', 'units', 'categories', 'current_date'));
         return $pdf->download('report.pdf');
     }
 

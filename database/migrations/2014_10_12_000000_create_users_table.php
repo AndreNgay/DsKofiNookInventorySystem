@@ -34,7 +34,13 @@ return new class extends Migration
             $table->boolean('archived')->default(false);
             $table->boolean('profile_made')->default(false);
 
+            $table->boolean('verified')->default(false);
+            // verification token
+            $table->string('verification_token')->nullable();
+
             //remember token
+            
+
             $table->string('remember_token')->nullable();
             
             $table->timestamps();

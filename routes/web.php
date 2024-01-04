@@ -10,6 +10,8 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\PdfGenerator;
+use App\Http\Controllers\PdfGeneratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,6 @@ use App\Http\Controllers\ChartController;
 Route::get('/', function () {
     return view('auth.login');
 });
-
 
 Route::get('/api/earnings', [ChartController::class, 'getEarningsData']);
 
@@ -120,3 +121,8 @@ Route::get('/accounts', App\Livewire\Accounts\Page::class)
 Route::get('/reports', App\Livewire\Reports\Page::class)
     ->middleware('auth', 'profile-made')
     ->name('reports');
+
+// PDF Generator
+Route::get('/pdfgenerator', App\Livewire\PdfGenerator\Page::class)
+    ->middleware('auth', 'profile-made')
+    ->name('pdfgenerator');

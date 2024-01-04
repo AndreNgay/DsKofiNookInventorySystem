@@ -14,7 +14,7 @@ class Page extends Component
 {
     public $inventory_item, $inventory_items, $categories, $units;
 
-    public $id, $item_name, $stock_reminder, $expiration_reminder, $category_id, $unit_id;
+    public $id, $item_name, $item_description, $stock_reminder, $expiration_reminder, $category_id, $unit_id;
     public $category_selections=[], $unit_selections=[];
     public function render()
     {
@@ -40,6 +40,7 @@ class Page extends Component
 
     public function resetInputs() {
         $this->item_name = '';
+        $this->item_description = '';
         $this->stock_reminder = '';
         $this->expiration_reminder = '';
         $this->category_id = '';
@@ -49,6 +50,7 @@ class Page extends Component
     public function store() {
         $this->validate([
             'item_name' => 'required',
+            'item_description' => 'required',
             'stock_reminder' => 'required',
             'expiration_reminder' => '',
             'category_id' => 'required',
@@ -57,6 +59,7 @@ class Page extends Component
 
         InventoryItem::create([
             'item_name' => $this->item_name,
+            'item_description' => $this->item_description,
             'stock_reminder' => $this->stock_reminder,
             'expiration_reminder' => $this->expiration_reminder,
             'category_id' => $this->category_id,
@@ -78,6 +81,7 @@ class Page extends Component
         $inventory_item = InventoryItem::find($id);
         $this->id = $id;
         $this->item_name = $inventory_item->item_name;
+        $this->item_description = $inventory_item->item_description;
         $this->stock_reminder = $inventory_item->stock_reminder;
         $this->expiration_reminder = $inventory_item->expiration_reminder;
         $this->category_id = $inventory_item->category_id;
@@ -87,6 +91,7 @@ class Page extends Component
     public function update() {
         InventoryItem::find($this->id)->update([
             'item_name' => $this->item_name,
+            'item_description' => $this->item_description,
             'stock_reminder' => $this->stock_reminder,
             'expiration_reminder' => $this->expiration_reminder,
             'category_id' => $this->category_id,

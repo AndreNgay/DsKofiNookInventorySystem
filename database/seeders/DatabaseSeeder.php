@@ -63,38 +63,121 @@ class DatabaseSeeder extends Seeder
             'profile_made' => true,
         ]);
 
+        // CATEGORIES
         Category::create([
-            'category_name' => 'Liquid',
-            'description' => '',
-        ]);
-        
-        Category::create([
-            'category_name' => 'Dry Ingredient',
-            'description' => '',
+            'category_name' => 'Canned',
+            'description' => 'Ingredient contained in Cans. Example: Condensed Milk, Evaporated Milk, etc.',
         ]);
         Category::create([
-            'category_name' => 'Count',
-            'description' => '',
+            'category_name' => 'Bottled/Jarred',
+            'description' => 'Ingredient contained in Cans. Example: Condensed Milk, Evaporated Milk, etc.',
+        ]);
+        Category::create([
+            'category_name' => 'Bagged',
+            'description' => 'Ingredient contained in Bags. Example Flour, Sugar, Cocoa Powder, Coffee Granules, etc.',
+        ]);
+        Category::create([
+            'category_name' => 'Liquid Cartoned',
+            'description' => 'Ingredient contained in Cans. Example: Condensed Milk, Evaporated Milk, etc.',
+        ]);
+        Category::create([
+            'category_name' => 'Boxed (Dry)',
+            'description' => 'Ingredient contained in Boxes. Cereals, Fruit Juices, etc.',
+        ]);
+        Category::create([
+            'category_name' => 'Boxed (Per Piece)',
+            'description' => 'Ingredient contained in Boxes. Cereals, Fruit Juices, etc.',
+        ]);
+        Category::create([
+            'category_name' => 'Container',
+            'description' => 'Plastic Cups, Straws, Plastic Bags, etc.',
         ]);
 
+        // UNITS
+        //1-canned
         Unit::create([
             'category_id' => 1,
             'unit_name' => 'Mililiters',
             'unit_conversion' => 1,
             'default_unit' => true
-        ]);
+        ]);        
+        Unit::create([
+            'category_id' => 1,
+            'unit_name' => 'Liters',
+            'unit_conversion' => 1000,
+            'default_unit' => false
+        ]);        
+
+        //2-bottled/jarred
         Unit::create([
             'category_id' => 2,
-            'unit_name' => 'Grams',
+            'unit_name' => 'Mililiters',
             'unit_conversion' => 1,
             'default_unit' => true
-        ]);
+        ]);        
+        Unit::create([
+            'category_id' => 2,
+            'unit_name' => 'Liters',
+            'unit_conversion' => 1000,
+            'default_unit' => false
+        ]);   
+
+        //3-bagged
         Unit::create([
             'category_id' => 3,
+            'unit_name' => 'grams',
+            'unit_conversion' => 1,
+            'default_unit' => true
+        ]);        
+        Unit::create([
+            'category_id' => 3,
+            'unit_name' => 'Kilograms',
+            'unit_conversion' => 1000,
+            'default_unit' => false
+        ]);
+
+        //4-liquid cartoned
+        Unit::create([
+            'category_id' => 4,
+            'unit_name' => 'Mililiters',
+            'unit_conversion' => 1,
+            'default_unit' => true
+        ]);        
+        Unit::create([
+            'category_id' => 4,
+            'unit_name' => 'Liters',
+            'unit_conversion' => 1000,
+            'default_unit' => false
+        ]);
+
+        //5-boxed dry
+        Unit::create([
+            'category_id' => 5,
+            'unit_name' => 'grams',
+            'unit_conversion' => 1,
+            'default_unit' => true
+        ]);        
+        Unit::create([
+            'category_id' => 5,
+            'unit_name' => 'Kilograms',
+            'unit_conversion' => 1000,
+            'default_unit' => false
+        ]);
+
+        //6-boxed per piece
+        Unit::create([
+            'category_id' => 6,
             'unit_name' => 'Pieces',
             'unit_conversion' => 1,
             'default_unit' => true
         ]);
 
+        //7-container
+        Unit::create([
+            'category_id' => 7,
+            'unit_name' => 'Pieces',
+            'unit_conversion' => 1,
+            'default_unit' => true
+        ]);
     }
 }

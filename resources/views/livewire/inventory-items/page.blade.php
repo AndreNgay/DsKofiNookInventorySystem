@@ -52,7 +52,6 @@
                 <tbody class="table-group-divider">
                     @foreach ($inventory_items as $inventory_item)
                     <tr>
-
                         <th scope="row">{{ $inventory_item->id }}</th>
                         <td>{{ $inventory_item->item_name }}</td>
                         <td>
@@ -100,6 +99,4 @@
             </table>
         </div>
     </div>
-
-    
 </div>

@@ -85,4 +85,7 @@
             </table>
         </div>
     </div>
+
+    {{ $units->links() }}
+
 </div>

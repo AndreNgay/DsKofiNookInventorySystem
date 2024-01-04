@@ -48,37 +48,38 @@
                 </thead>
                 <tbody class="table-group-divider">
                     @foreach ($menu_items as $menu_item)
-                    <tr>
+                        <tr>
 
-                        <th scope="row">{{ $menu_item->id  }}</th>
-                        <td>{{ $menu_item->item_name }}</td>
-                        <td>{{ $menu_item->price }}</td>
+                            <th scope="row">{{ $menu_item->id  }}</th>
+                            <td>{{ $menu_item->item_name }}</td>
+                            <td>{{ $menu_item->price }}</td>
 
-                        <td>
-                            <div class="d-flex">
-                                <button class="btn btn-primary ms-2" type="button"
-                                    href="{{ route('ingredients-menu-item', ['id' => $menu_item->id]) }}" wire:navigate>
-                                    <i class="fas fa-solid fa-mortar-pestle">
-                                    </i>
-                                    View Ingredients
-                                </button>
+                            <td>
+                                <div class="d-flex">
+                                    <button class="btn btn-primary ms-2" type="button"
+                                        href="{{ route('ingredients-menu-item', ['id' => $menu_item->id]) }}" wire:navigate>
+                                        <i class="fas fa-solid fa-mortar-pestle">
+                                        </i>
+                                        View Ingredients
+                                    </button>
 
-                                <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                    data-bs-target="#editMenuItem" wire:click="edit({{ $menu_item->id }})">
-                                    <span class="bi bi-pencil-square">
-                                        Edit</span>
-                                </button>
+                                    <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
+                                        data-bs-target="#editMenuItem" wire:click="edit({{ $menu_item->id }})">
+                                        <span class="bi bi-pencil-square">
+                                            Edit</span>
+                                    </button>
 
-                                <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                    data-bs-target="#deleteMenuItem" wire:click="delete({{ $menu_item->id }})">
-                                    <span class="bi bi-trash-fill"> Delete</span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                                    <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
+                                        data-bs-target="#deleteMenuItem" wire:click="delete({{ $menu_item->id }})">
+                                        <span class="bi bi-trash-fill"> Delete</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    {{ $menu_items->links() }}
 </div>

@@ -9,6 +9,20 @@ use App\Models\Unit;
 
 class Page extends Component
 {
+
+    use WithPagination;
+
+    public function render()
+    {
+        $inventory_items = InventoryItem::simplePaginate(10);
+        $categories = Category::all();
+        $units = Unit::all();
+        return view('livewire.reports.page', [
+            'inventory_items' => $inventory_items,
+            'categories' => $categories,
+            'units' => $units,
+        ]);
+
     public $inventoryItems, $categories, $units;
     public $query; // For search query
     public $selectedRestockFilter = ''; // For selected restock filter
@@ -115,5 +129,6 @@ class Page extends Component
     {
         $this->reset(['query', 'selectedRestockFilter', 'categoryFilter']);
         $this->refreshInventoryItems();
+    }
     }
 }

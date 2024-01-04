@@ -97,9 +97,6 @@
                 </tbody>
             </table>
         </div>
-
-        {{ $inventory_item_batches->links() }}
-
     </div>
 
 </div>

@@ -9,6 +9,7 @@ class InventoryItem extends Model
 {
     protected $fillable = [
         'item_name',
+        'item_description',
         'stock_reminder',
         'expiration_reminder',
         'category_id',

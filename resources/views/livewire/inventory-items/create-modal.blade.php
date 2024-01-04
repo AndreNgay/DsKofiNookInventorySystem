@@ -15,6 +15,14 @@
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Item Description</label>
+                    <input type="text" class="form-control" wire:model="item_description">
+                    @error('item_description')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
 
                 <div class="mb-3">
                     <label class="form-label">Stock Reminder</label>
